@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg2x3db3m6r4u"]
+
+[ext_resource type="Texture2D" uid="uid://dg0mhfx8nk33t" path="res://assets/circle.png" id="1_a85iw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxf0c"]
+radius = 152.0
+
+[node name="Projectile" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.50724363, 5.95618e-07, 2.8878452e-07, 1)
+texture = ExtResource("1_a85iw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qxf0c")

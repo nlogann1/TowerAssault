@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c56j7dt1ny8iy"]
+
+[ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b6f6kyldv4pwn" path="res://scenes/tower.tscn" id="2_tefeu"]
+[ext_resource type="Script" uid="uid://rt5lfrafojs6" path="res://scripts/tower.gd" id="3_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cuflqav2hirwp" path="res://scenes/area.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
+
+[sub_resource type="Curve2D" id="Curve2D_6uqi0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tbgi4")
+
+[node name="Tower" parent="." instance=ExtResource("2_tefeu")]
+position = Vector2(240, 360)
+script = ExtResource("3_o6xl0")
+metadata/_edit_group_ = true
+
+[node name="Area2D" parent="Tower" instance=ExtResource("4_tipki")]
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_6uqi0")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="HUD" parent="." instance=ExtResource("5_tbgi4")]

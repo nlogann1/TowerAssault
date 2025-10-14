@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bujrsqxbp47nh"]
+
+[ext_resource type="Script" uid="uid://cdq7nhs31htq5" path="res://scripts/mobpath.gd" id="1_r6oaa"]
+[ext_resource type="Texture2D" uid="uid://5oxao5cwoptm" path="res://assets/gobbie.png" id="2_jd5wr"]
+
+[sub_resource type="Curve2D" id="Curve2D_o0aqr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 384, 720, 0, 0, 0, 0, 384, 576, 0, 0, 0, 0, 256, 576, 0, 0, 0, 0, 256, 640, 0, 0, 0, 0, 128, 640, 0, 0, 0, 0, 64, 576, 0, 0, 0, 0, 64, 320, 0, 0, 0, 0, 192, 320, 0, 0, 0, 0, 192, 384, 0, 0, 0, 0, 128, 448, 0, 0, 0, 0, 192, 512, 0, 0, 0, 0, 256, 448, 0, 0, 0, 0, 448, 448, 0, 0, 0, 0, 384, 384, 0, 0, 0, 0, 320, 320, 0, 0, 0, 0, 256, 320, 0, 0, 0, 0, 256, 256, 0, 0, 0, 0, 384, 256, 0, 0, 0, 0, 384, 128, 0, 0, 0, 0, 320, 64, 0, 0, 0, 0, 256, 128, 0, 0, 0, 0, 256, 192, 0, 0, 0, 0, 128, 192, 0, 0, 0, 0, 128, 64)
+}
+point_count = 24
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d8kum"]
+radius = 28.071337
+
+[node name="mobpath" type="Node2D"]
+script = ExtResource("1_r6oaa")
+metadata/_edit_group_ = true
+
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_o0aqr")
+
+[node name="EnemyFollowPath" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(384, 720)
+rotation = -1.5707964
+rotates = false
+loop = false
+
+[node name="RigidBody2D" type="RigidBody2D" parent="EnemyPath/EnemyFollowPath" groups=["enemies"]]
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyPath/EnemyFollowPath/RigidBody2D"]
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_jd5wr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="EnemyPath/EnemyFollowPath/RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPath/EnemyFollowPath/RigidBody2D"]
+shape = SubResource("CircleShape2D_d8kum")

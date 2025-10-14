@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj7tdcte2r8rx"]
+
+[ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_bsing"]
+[ext_resource type="Texture2D" uid="uid://5oxao5cwoptm" path="res://assets/gobbie.png" id="2_d4cuo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
+radius = 28.071337
+
+[node name="mob" type="RigidBody2D" groups=["enemies"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_bsing")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_d4cuo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s7bn3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
