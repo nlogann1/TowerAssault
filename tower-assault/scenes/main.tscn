@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://c56j7dt1ny8iy"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://bujrsqxbp47nh" path="res://scenes/mobpath.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b6f6kyldv4pwn" path="res://scenes/tower.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
 
 [sub_resource type="Curve2D" id="Curve2D_6uqi0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 5
+point_count = 3
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tbgi4")
