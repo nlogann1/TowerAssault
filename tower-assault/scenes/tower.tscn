@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c2bw2x7y8d4xo" path="res://assets/tower.png" id="1_arn3v"]
 [ext_resource type="Texture2D" uid="uid://dg0mhfx8nk33t" path="res://assets/circle.png" id="2_ay4al"]
-[ext_resource type="Script" uid="uid://cbj2iccnyq58v" path="res://scenes/tower_range.gd" id="2_ktxwe"]
+[ext_resource type="Script" uid="uid://cbj2iccnyq58v" path="res://scripts/tower_range.gd" id="2_ktxwe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bn6qc"]
 radius = 36.0

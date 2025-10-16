@@ -12,11 +12,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
-	if Input.is_action_pressed(&"left_click") and build_tower_display:
+	if Input.is_action_just_pressed(&"left_click") and build_tower_display:
 		build_tower(get_viewport().get_mouse_position())
-	if Input.is_action_pressed(&"escape") and build_tower_display:
+	if Input.is_action_just_pressed(&"escape") and build_tower_display:
 		build_tower_display = false
 		$HUD.cancel_build_tower()
+	
+#func _unhandled_input(event):
+	#if event is InputEventKey:
+		#if Input.is_action_just_pressed(&"left_click") and build_tower_display:
+			#build_tower(get_viewport().get_mouse_position())
+		#if Input.is_action_pressed(&"escape") and build_tower_display:
+			#build_tower_display = false
+			#$HUD.cancel_build_tower()
 
 func new_game():
 	score = 0
@@ -44,6 +52,7 @@ func _on_mob_timer_timeout():
 	mob.position = mob_spawn_location.position
 	
 	# Set the mob's direction perpendicular to the path direction.
+	mob_spawn_location.rotation = 0
 	var direction = mob_spawn_location.rotation + PI / 2
 	
 	# Choose the velocity for the mob.
