@@ -1,6 +1,5 @@
 extends Control
 
-# Get a reference to the nodes we need to control.
 @onready var scroll_animation = $ScrollButtonAnimation
 @onready var start_button = $"VBoxContainer/Button (Start Game)"
 
