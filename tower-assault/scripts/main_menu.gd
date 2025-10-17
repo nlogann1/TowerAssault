@@ -5,6 +5,7 @@ extends Control
 
 func _ready():
 	
+	$AnimatedSprite2D.play()
 	start_button.modulate.a = 0
 	start_button.disabled = true
 	
