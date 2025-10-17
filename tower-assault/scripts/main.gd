@@ -5,6 +5,8 @@ extends Node
 var score
 var lives
 var build_tower_display
+var mouse_pos
+var can_build = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,18 +15,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	if Input.is_action_just_pressed(&"left_click") and build_tower_display:
-		build_tower(get_viewport().get_mouse_position())
+		mouse_pos = get_viewport().get_mouse_position()
+		if can_build:
+			build_tower(mouse_pos)
+			can_build = false
 	if Input.is_action_just_pressed(&"escape") and build_tower_display:
 		build_tower_display = false
 		$HUD.cancel_build_tower()
-	
-#func _unhandled_input(event):
-	#if event is InputEventKey:
-		#if Input.is_action_just_pressed(&"left_click") and build_tower_display:
-			#build_tower(get_viewport().get_mouse_position())
-		#if Input.is_action_pressed(&"escape") and build_tower_display:
-			#build_tower_display = false
-			#$HUD.cancel_build_tower()
 
 func new_game():
 	score = 0
@@ -85,3 +82,9 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+func _on_build_zone_mouse_entered() -> void:
+	can_build = true
+
+func _on_build_zone_mouse_exited() -> void:
+	can_build = false

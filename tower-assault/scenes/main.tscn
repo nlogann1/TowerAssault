@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c56j7dt1ny8iy"]
+[gd_scene load_steps=7 format=3 uid="uid://c56j7dt1ny8iy"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
@@ -10,6 +10,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1080, 24, 0, 0, 0, 0, 1080, 696, 0, 0, 0, 0, 1080, 24)
 }
 point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(576, 720)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tbgi4")
@@ -35,8 +38,18 @@ curve = SubResource("Curve2D_6uqi0")
 position = Vector2(1080, 24)
 rotation = 1.5707964
 
+[node name="BuildZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
+position = Vector2(288, 360)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="Sprite2D" type="Sprite2D" parent="BuildZone"]
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="build_tower" from="HUD" to="." method="tower_button_pressed"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="mouse_entered" from="BuildZone" to="." method="_on_build_zone_mouse_entered"]
+[connection signal="mouse_exited" from="BuildZone" to="." method="_on_build_zone_mouse_exited"]
