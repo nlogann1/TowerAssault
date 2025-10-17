@@ -18,7 +18,7 @@ func _on_attack_timer_timeout():
 	var projectile = proj_scene.instantiate()
 	
 	# Set the projectile's position & rotation.
-	projectile.position = Vector2(0,-50)
+	projectile.position = Vector2(40, 0)
 	
 	# Spawn the projectile by adding it to the Main scene.
 	add_child(projectile)
