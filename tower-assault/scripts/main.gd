@@ -53,7 +53,7 @@ func _on_mob_timer_timeout():
 	
 	# Set the mob's direction perpendicular to the path direction.
 	mob_spawn_location.rotation = 0
-	var direction = mob_spawn_location.rotation + PI / 2
+	var direction = mob_spawn_location.rotation + PI
 	
 	# Choose the velocity for the mob.
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
