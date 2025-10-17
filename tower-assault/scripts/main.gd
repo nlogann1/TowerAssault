@@ -56,7 +56,7 @@ func _on_mob_timer_timeout():
 	var direction = mob_spawn_location.rotation + PI
 	
 	# Choose the velocity for the mob.
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	var velocity = Vector2(randf_range(125.0, 200.0), 0.0)
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	# Spawn the mob by adding it to the Main scene.

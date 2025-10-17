@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 func damage_taken(amount):
 	hp -= amount
 	health_bar.value = hp
+	if hp <= 0:
+		queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	var parent_node = get_parent()
