@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://5oxao5cwoptm" path="res://assets/gobbie.png" id="2_d4cuo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
-radius = 28.071337
+radius = 29.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsing"]
 bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
@@ -22,6 +22,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_d4cuo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, -2)
 shape = SubResource("CircleShape2D_s7bn3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
