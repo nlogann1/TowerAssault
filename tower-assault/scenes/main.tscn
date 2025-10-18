@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c56j7dt1ny8iy"]
+[gd_scene load_steps=7 format=3 uid="uid://c56j7dt1ny8iy"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://clqcu0bijloev" path="res://scenes/archer.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="5_tefeu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(154, 424)
+size = Vector2(378, 576)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tbgi4")
@@ -28,15 +29,12 @@ one_shot = true
 [node name="BuildZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
-position = Vector2(75, 364)
+position = Vector2(187, 368)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="Sprite2D" type="Sprite2D" parent="BuildZone"]
 
 [node name="SpawnPoints" type="Node" parent="."]
-
-[node name="TargetPoint" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(80, 364)
 
 [node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1080, 536)
@@ -49,6 +47,9 @@ position = Vector2(1080, 72)
 
 [node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1080, 632)
+
+[node name="Base" parent="." instance=ExtResource("5_tefeu")]
+position = Vector2(80, 376)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

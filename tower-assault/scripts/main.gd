@@ -45,7 +45,7 @@ func _on_mob_timer_timeout():
 	# Set the mob's starting position
 	mob.global_position = random_spawn_point.global_position
 	# We tell the mob where to go.
-	mob.target_position = $TargetPoint.global_position
+	mob.target_position = $Base.global_position
 
 	add_child(mob)
 
@@ -59,11 +59,6 @@ func tower_button_pressed():
 	build_tower_display = true
 	# However we want the display to work
 
-func lose_life(amount):
-	lives -= amount
-	if lives <= 0:
-		game_over()
-	$HUD.update_lives(lives)
 
 func _on_score_timer_timeout():
 	score += 1
