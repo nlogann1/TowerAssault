@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwjv8d0rdpihv"]
+
+[ext_resource type="Script" uid="uid://c4mpehc4kar40" path="res://scripts/base.gd" id="1_pvqg0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvqg0"]
+size = Vector2(208, 320)
+
+[node name="Base" type="Area2D"]
+position = Vector2(80, 352)
+script = ExtResource("1_pvqg0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_pvqg0")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = 384.0
+offset_top = -360.0
+offset_right = 564.0
+offset_bottom = -317.0

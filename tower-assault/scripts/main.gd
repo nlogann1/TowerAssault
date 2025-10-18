@@ -36,29 +36,19 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
-	
+
 func _on_mob_timer_timeout():
-	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
-	
-	# Choose a random location on Path2D.
-	var mob_spawn_location = $MobPath/MobSpawnLocation
-	mob_spawn_location.progress_ratio = randf()
-	
-	# Set the mob's position to the random location.
-	mob.position = mob_spawn_location.position
-	
-	# Set the mob's direction perpendicular to the path direction.
-	mob_spawn_location.rotation = 0
-	var direction = mob_spawn_location.rotation + PI
-	
-	# Choose the velocity for the mob.
-	var velocity = Vector2(randf_range(125.0, 200.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-	
-	# Spawn the mob by adding it to the Main scene.
+
+	var spawn_points = $SpawnPoints.get_children()
+	var random_spawn_point = spawn_points.pick_random()
+	# Set the mob's starting position
+	mob.global_position = random_spawn_point.global_position
+	# We tell the mob where to go.
+	mob.target_position = $Base.global_position
+
 	add_child(mob)
-	
+
 func build_tower(position):
 	var tower = tower_scene.instantiate()
 	tower.position = position
@@ -69,11 +59,6 @@ func tower_button_pressed():
 	build_tower_display = true
 	# However we want the display to work
 
-func lose_life(amount):
-	lives -= amount
-	if lives <= 0:
-		game_over()
-	$HUD.update_lives(lives)
 
 func _on_score_timer_timeout():
 	score += 1
