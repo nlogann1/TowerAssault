@@ -8,9 +8,11 @@ script = ExtResource("1_ahhtf")
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
 
 [node name="LivesLabel" type="Label" parent="."]
+visible = false
 offset_top = 25.0
 offset_right = 40.0
 offset_bottom = 48.0
