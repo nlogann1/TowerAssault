@@ -51,9 +51,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -27.0
-offset_bottom = 27.0
+offset_left = -62.0
+offset_top = -30.0
+offset_right = -2.0
+offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 2
 toggle_mode = true
@@ -65,6 +66,15 @@ Tower"
 wait_time = 2.0
 one_shot = true
 
+[node name="SpawnSoldierButton" type="Button" parent="."]
+offset_left = 1017.0
+offset_top = 390.0
+offset_right = 1079.0
+offset_bottom = 444.0
+text = "Spawn
+Soldier"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="SpawnSoldierButton" to="." method="_on_spawn_soldier_button_pressed"]

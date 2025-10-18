@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c4mpehc4kar40" path="res://scripts/base.gd" id="1_pvqg0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvqg0"]
-size = Vector2(208, 320)
+size = Vector2(152, 320)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvqg0"]
 bg_color = Color(1, 0.3438021, 0.27205622, 1)
@@ -11,14 +11,16 @@ corner_detail = 10
 shadow_color = Color(0, 0, 0, 1)
 shadow_size = 6
 
-[node name="Base" type="Area2D"]
+[node name="Base" type="Area2D" groups=["base"]]
 position = Vector2(80, 352)
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_pvqg0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24, 0)
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_pvqg0")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
