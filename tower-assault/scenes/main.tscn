@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c56j7dt1ny8iy"]
+[gd_scene load_steps=9 format=3 uid="uid://c56j7dt1ny8iy"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://clqcu0bijloev" path="res://scenes/archer.tscn" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bd5rmbtjdhobj" path="res://assets/game_background_4.png" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://lpfn3740ojbq" path="res://assets/d2x297b-54f069b5-efef-407c-8bb4-bf81f4b547f4.png" id="7_o6xl0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(378, 576)
@@ -14,6 +16,11 @@ script = ExtResource("1_tbgi4")
 mob_scene = ExtResource("2_jyhfs")
 tower_scene = ExtResource("3_jyhfs")
 metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(544, 359.99997)
+scale = Vector2(0.28333336, 0.3333333)
+texture = ExtResource("4_tefeu")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -37,19 +44,24 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1080, 536)
+position = Vector2(1080, 528)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1080, 184)
+position = Vector2(1080, 312)
 
 [node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1080, 72)
+position = Vector2(1080, 416)
 
 [node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1080, 632)
+position = Vector2(1080, 600)
 
 [node name="Base" parent="." instance=ExtResource("5_tefeu")]
 position = Vector2(80, 376)
+
+[node name="Castle" type="Sprite2D" parent="Base"]
+position = Vector2(21, 24.5)
+scale = Vector2(1.2692307, 1.2378641)
+texture = ExtResource("7_o6xl0")
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
