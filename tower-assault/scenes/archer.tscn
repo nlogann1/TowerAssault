@@ -1,8 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://clqcu0bijloev"]
 
 [ext_resource type="Script" uid="uid://dw3hywtj6yx7n" path="res://scripts/archer.gd" id="1_b0l3x"]
-[ext_resource type="Texture2D" uid="uid://c2bw2x7y8d4xo" path="res://assets/tower.png" id="1_orquw"]
 [ext_resource type="PackedScene" uid="uid://bg2x3db3m6r4u" path="res://scenes/projectile.tscn" id="2_orquw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b0l3x"]
+load_path = "res://.godot/imported/tower.png-10a2aef8028988b756264007bfc6c076.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orquw"]
 size = Vector2(84, 86)
@@ -16,7 +18,7 @@ proj_scene = ExtResource("2_orquw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-5, -4.9999995)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_orquw")
+texture = SubResource("CompressedTexture2D_b0l3x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, -5)
