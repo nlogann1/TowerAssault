@@ -36,6 +36,19 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="TargetPoint" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(80, 364)
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1080, 536)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1080, 184)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1080, 72)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1080, 632)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
