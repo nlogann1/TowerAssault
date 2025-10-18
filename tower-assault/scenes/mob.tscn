@@ -12,9 +12,8 @@ bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4cuo"]
 bg_color = Color(0.77855855, 0, 0.21428034, 1)
 
-[node name="mob" type="RigidBody2D" groups=["enemies"]]
+[node name="mob" type="CharacterBody2D" groups=["enemies"]]
 collision_mask = 0
-gravity_scale = 0.0
 script = ExtResource("1_bsing")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
