@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal start_game
 signal build_tower
+signal spawn_soldier
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,3 +48,7 @@ func cancel_build_tower():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+
+
+func _on_spawn_soldier_button_pressed() -> void:
+	spawn_soldier.emit()

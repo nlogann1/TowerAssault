@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg2x3db3m6r4u"]
 
-[ext_resource type="Texture2D" uid="uid://dg0mhfx8nk33t" path="res://assets/circle.png" id="1_a85iw"]
 [ext_resource type="Script" uid="uid://dd5d4s3yycr5q" path="res://scripts/projectile.gd" id="1_q3m7n"]
+[ext_resource type="Texture2D" uid="uid://djixcukb62qiv" path="res://assets/Arrow01(32x32).png" id="2_q3m7n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxf0c"]
-radius = 152.0
+radius = 500.39978
 
 [node name="Projectile" type="Area2D"]
 scale = Vector2(0.05, 0.05)
@@ -12,9 +12,12 @@ script = ExtResource("1_q3m7n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.50724363, 5.95618e-07, 2.8878452e-07, 1)
-texture = ExtResource("1_a85iw")
+position = Vector2(-1.5258789e-05, 0)
+scale = Vector2(41.874996, 37.499996)
+texture = ExtResource("2_q3m7n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.6293945e-06, 1.9073486e-06)
 shape = SubResource("CircleShape2D_qxf0c")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var tower_scene: PackedScene
+@export var soldier_scene: PackedScene
 var score
 var lives
 var build_tower_display
@@ -10,7 +11,7 @@ var can_build = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$HUD.spawn_soldier.connect(_on_hud_spawn_soldier)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
@@ -73,3 +74,8 @@ func _on_build_zone_mouse_entered() -> void:
 
 func _on_build_zone_mouse_exited() -> void:
 	can_build = false
+
+func _on_hud_spawn_soldier():
+	var soldier = soldier_scene.instantiate()
+	soldier.global_position = $Base.global_position + Vector2(100, 0)
+	add_child(soldier)
