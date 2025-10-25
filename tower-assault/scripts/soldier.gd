@@ -5,9 +5,15 @@ var health = 100.0
 var attack_damage = 10.0
 
 var target_monster = null
+# This stores the unique "slot" this soldier will run to
+var target_attack_position = Vector2.ZERO
 
 enum {IDLE, WALK, ATTACK}
 var state = IDLE
+
+# Attack range here
+@export var attack_range: float = 60.0
+
 
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var attack_timer = $AttackTimer
@@ -25,13 +31,15 @@ func _physics_process(_delta):
 		find_nearest_target()
 		state = IDLE
 	else:
-		var distance = global_position.distance_to(target_monster.global_position)
-		if distance > 65:
+		# We check the distance to the mob
+		var distance_to_mob = global_position.distance_to(target_monster.global_position)
+		
+		if distance_to_mob > attack_range:
+			# We are not in attack range, so we walk to our slot
 			state = WALK
 		else:
-			# Target is in range.
+			# We are in attack range
 			if state != ATTACK:
-				# If we aren't already attacking, start our first attack NOW.
 				state = ATTACK
 				do_attack()
 	
@@ -41,7 +49,8 @@ func _physics_process(_delta):
 			anim_sprite.play("idle")
 			
 		WALK:
-			velocity = global_position.direction_to(target_monster.global_position) * speed
+			# We walk towards our unique slot, not the mob's center
+			velocity = global_position.direction_to(target_attack_position) * speed
 			anim_sprite.play("walk")
 			anim_sprite.flip_h = (velocity.x < 0)
 			
@@ -63,7 +72,22 @@ func find_nearest_target():
 				min_distance = distance
 				nearest_mob = body
 	
-	target_monster = nearest_mob
+	# When we find a new target, pick a random attack slot around it
+	if nearest_mob != target_monster:
+		target_monster = nearest_mob
+		
+		if is_instance_valid(target_monster):
+			# Pick a random spot in a circle *within* our attack range
+			var offset_distance = randf_range(attack_range * 0.5, attack_range * 0.8)
+			var offset = Vector2.RIGHT.rotated(randf() * TAU) * offset_distance
+			target_attack_position = target_monster.global_position + offset
+		else:
+			target_attack_position = Vector2.ZERO # No target, no position
+			
+	elif not is_instance_valid(target_monster):
+		# Our old target is dead, clear it
+		target_monster = null
+		target_attack_position = Vector2.ZERO
 
 
 func take_damage(amount):
@@ -72,22 +96,30 @@ func take_damage(amount):
 	if health <= 0:
 		queue_free()
 
+
 func do_attack():
 	if is_instance_valid(target_monster):
-		state = ATTACK 
+		var mob_distance = global_position.distance_to(target_monster.global_position)
+		
+		if mob_distance > attack_range + 10:
+			# The mob moved out of range, go back to walking
+			state = WALK
+			target_monster = null # Retarget
+			return
+
+		state = ATTACK
 		anim_sprite.play("attack")
 		target_monster.damage_taken(attack_damage)
-		attack_timer.start() # Start the timer after attacking
+		attack_timer.start()
 	else:
-		# Target died before we could attack
 		state = IDLE
 
 
 func _on_attack_timer_timeout():
-	# Timer is done, so we attack again.
 	do_attack()
+
 
 func _on_animated_sprite_2d_animation_finished():
 	if anim_sprite.animation == "attack":
-		# Attack animation is done, just go to idle.
+		# Go to idle while waiting for the timer
 		anim_sprite.play("idle")

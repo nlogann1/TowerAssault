@@ -216,9 +216,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pyc10"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x21nm"]
 radius = 8.0
-height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evcuf"]
 radius = 745.07446
@@ -240,7 +239,7 @@ sprite_frames = SubResource("SpriteFrames_46q4a")
 animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_pyc10")
+shape = SubResource("CircleShape2D_x21nm")
 
 [node name="DetectionRange" type="Area2D" parent="."]
 collision_layer = 2
