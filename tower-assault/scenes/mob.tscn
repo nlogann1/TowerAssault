@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dieitjija6gfs" path="res://assets/Monster_gruen.png" id="2_bsing"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
-radius = 40.0
+radius = 32.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsing"]
 bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
