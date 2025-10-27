@@ -1,12 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://rvughh3loyib"]
+[gd_scene load_steps=29 format=3 uid="uid://rvughh3loyib"]
 
 [ext_resource type="Script" uid="uid://br80jq3tbh1jg" path="res://scripts/soldier.gd" id="1_2oslh"]
 [ext_resource type="Texture2D" uid="uid://c5rrd6c2otp03" path="res://assets/Soldier-Attack01.png" id="2_x21nm"]
 [ext_resource type="Texture2D" uid="uid://dp46mrcpdu4vw" path="res://assets/Soldier-Walk.png" id="3_hpa1h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ajv6t"]
-atlas = ExtResource("2_x21nm")
-region = Rect2(0, 0, 100, 100)
+[ext_resource type="Texture2D" uid="uid://xf1yk0sv0xt2" path="res://assets/Soldier-Idle.png" id="3_x21nm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_50ktg"]
 atlas = ExtResource("2_x21nm")
@@ -26,6 +23,30 @@ region = Rect2(400, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_se1ou"]
 atlas = ExtResource("2_x21nm")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpa1h"]
+atlas = ExtResource("3_x21nm")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46q4a"]
+atlas = ExtResource("3_x21nm")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyc10"]
+atlas = ExtResource("3_x21nm")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evcuf"]
+atlas = ExtResource("3_x21nm")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iib6"]
+atlas = ExtResource("3_x21nm")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewl12"]
+atlas = ExtResource("3_x21nm")
 region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iflmy"]
@@ -64,7 +85,64 @@ region = Rect2(700, 0, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ajv6t")
+"texture": SubResource("AtlasTexture_50ktg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jak6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se1ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ktg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jak6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se1ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ktg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jak6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se1ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ktg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jak6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kv0so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se1ou")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_50ktg")
@@ -83,6 +161,29 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpa1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46q4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyc10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evcuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iib6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewl12")
+}],
+"loop": true,
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -115,10 +216,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pyc10"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x21nm"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evcuf"]
-radius = 1266.049
+radius = 745.07446
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2oslh"]
 bg_color = Color(0.98039216, 0.18431373, 0.023529412, 1)
@@ -137,7 +239,7 @@ sprite_frames = SubResource("SpriteFrames_46q4a")
 animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_pyc10")
+shape = SubResource("CircleShape2D_x21nm")
 
 [node name="DetectionRange" type="Area2D" parent="."]
 collision_layer = 2

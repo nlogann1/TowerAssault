@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 100.0
-var health = 10.0
+var health = 200.0
 var target_position = Vector2.ZERO # This is the main Base
 
 var attack_damage = 5.0
