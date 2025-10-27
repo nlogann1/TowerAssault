@@ -15,15 +15,12 @@ func _ready():
 	health_bar.max_value = health
 	health_bar.value = health
 
-
 func _physics_process(delta):
-	
 	# Only look for a new and closer target if our attack timer is stopped.
 	# but locks it onto a target once it starts attacking.
 	if attack_timer.is_stopped():
 		find_nearest_target() # This function updates target_monster
 	
-
 	if is_instance_valid(target_monster):
 		var distance = global_position.distance_to(target_monster.global_position)
 		
@@ -42,13 +39,11 @@ func _physics_process(delta):
 			if attack_timer.is_stopped():
 				anim_sprite.play("idle")
 				attack_timer.start()
-			
 	else:
 		velocity = Vector2.ZERO
 		anim_sprite.play("idle")
 		
 	move_and_slide()
-
 
 func find_nearest_target():
 	var nearest_mob = null
@@ -69,7 +64,6 @@ func find_nearest_target():
 	
 	# This will either set the nearest mob, or set 'null' if none are in range
 	target_monster = nearest_mob
-
 
 func take_damage(amount):
 	health -= amount

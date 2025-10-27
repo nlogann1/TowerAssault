@@ -60,7 +60,6 @@ func tower_button_pressed():
 	build_tower_display = true
 	# However we want the display to work
 
-
 func _on_score_timer_timeout():
 	score += 1
 	$HUD.update_score(score)
