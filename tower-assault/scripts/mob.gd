@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal died(reward)
 var speed = 100.0
 var health = 200.0
-var currency_reward = 10
+var currency_reward = 50
 var target_position = Vector2.ZERO # This is the main Base
 
 var attack_damage = 5.0
