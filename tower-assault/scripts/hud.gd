@@ -52,3 +52,6 @@ func _on_message_timer_timeout():
 
 func _on_spawn_soldier_button_pressed() -> void:
 	spawn_soldier.emit()
+
+func update_currency(amount):
+	$CurrencyLabel.text = "Gold: " + str(amount)

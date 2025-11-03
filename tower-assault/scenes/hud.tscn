@@ -72,6 +72,13 @@ offset_bottom = 444.0
 text = "Spawn
 Soldier"
 
+[node name="CurrencyLabel" type="Label" parent="."]
+offset_left = 907.0
+offset_top = 11.0
+offset_right = 1072.0
+offset_bottom = 39.0
+text = "Gold:"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

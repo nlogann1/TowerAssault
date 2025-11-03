@@ -6,6 +6,9 @@ extends Node
 var score
 var lives
 var build_tower_display
+var currency = 0
+var soldier_cost = 25
+var tower_cost = 50
 var mouse_pos
 var can_build = true
 
@@ -28,8 +31,11 @@ func new_game():
 	score = 0
 	lives = 10
 	build_tower_display = false
+	currency = 100
+	
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_currency(currency)
 	$HUD.show_message("Get Ready!")
 	get_tree().call_group("mobs", "queue_free")
 	

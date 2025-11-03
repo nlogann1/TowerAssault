@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
+signal died(reward)
 var speed = 100.0
 var health = 200.0
+var currency_reward = 10
 var target_position = Vector2.ZERO # This is the main Base
 
 var attack_damage = 5.0
@@ -30,6 +32,7 @@ func damage_taken(amount):
 	health -= amount
 	health_bar.value = health
 	if health <= 0:
+		died.emit(currency_reward)
 		queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
