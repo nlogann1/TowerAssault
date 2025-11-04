@@ -6,6 +6,9 @@ extends Node
 var score
 var lives
 var build_tower_display
+var currency = 0
+var soldier_cost = 25
+var tower_cost = 50
 var mouse_pos
 var can_build = true
 
@@ -28,8 +31,12 @@ func new_game():
 	score = 0
 	lives = 10
 	build_tower_display = false
+	currency = 500
+	
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_currency(currency)
+	$HUD.check_button_costs(currency)
 	$HUD.show_message("Get Ready!")
 	get_tree().call_group("mobs", "queue_free")
 	
@@ -49,12 +56,24 @@ func _on_mob_timer_timeout():
 	mob.target_position = $Base.global_position
 
 	add_child(mob)
+	mob.died.connect(_on_mob_died)
 
 func build_tower(position):
-	var tower = tower_scene.instantiate()
-	tower.position = position
-	tower.scale /= 2
-	add_child(tower)
+# Check if we have enough money
+	if currency >= tower_cost:
+		# If so, subtract the cost and update the HUD
+		currency -= tower_cost
+		$HUD.update_currency(currency)
+		$HUD.check_button_costs(currency)
+
+		# And build the tower
+		var tower = tower_scene.instantiate()
+		tower.position = position
+		tower.scale /= 2
+		add_child(tower)
+	else:
+		# Not enough money
+		print("Not enough gold for a tower!")
 	
 func tower_button_pressed():
 	build_tower_display = true
@@ -76,6 +95,22 @@ func _on_build_zone_mouse_exited() -> void:
 	can_build = false
 
 func _on_hud_spawn_soldier():
-	var soldier = soldier_scene.instantiate()
-	soldier.global_position = $Base.global_position + Vector2(100, 0)
-	add_child(soldier)
+# Check if we have enough money
+	if currency >= soldier_cost:
+		# If so, subtract the cost and update the HUD
+		currency -= soldier_cost
+		$HUD.update_currency(currency)
+		$HUD.check_button_costs(currency)
+
+		# And spawn the soldier
+		var soldier = soldier_scene.instantiate()
+		soldier.global_position = $Base.global_position + Vector2(100, 0)
+		add_child(soldier)
+	else:
+		# Not enough money (you can add a "buzz" sound here later)
+		print("Not enough gold for a soldier!")
+	
+func _on_mob_died(reward):
+	currency += reward
+	$HUD.update_currency(currency)
+	$HUD.check_button_costs(currency)

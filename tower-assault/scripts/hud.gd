@@ -4,6 +4,9 @@ signal start_game
 signal build_tower
 signal spawn_soldier
 
+var soldier_cost = 25
+var tower_cost = 50
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$BuildTower.hide()
@@ -52,3 +55,19 @@ func _on_message_timer_timeout():
 
 func _on_spawn_soldier_button_pressed() -> void:
 	spawn_soldier.emit()
+
+func update_currency(amount):
+	$CurrencyLabel.text = "Gold: " + str(amount)
+
+func check_button_costs(current_currency):
+	# --- Check Soldier Button ---
+	if current_currency >= soldier_cost:
+		$SpawnSoldierButton.disabled = false
+	else:
+		$SpawnSoldierButton.disabled = true
+		
+	# --- Check Tower Button ---
+	if current_currency >= tower_cost:
+		$BuildTower.disabled = false
+	else:
+		$BuildTower.disabled = true

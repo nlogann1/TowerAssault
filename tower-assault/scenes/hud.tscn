@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=3 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ahhtf"]
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ahhtf")
@@ -71,6 +75,14 @@ offset_right = 1079.0
 offset_bottom = 444.0
 text = "Spawn
 Soldier"
+
+[node name="CurrencyLabel" type="Label" parent="."]
+offset_left = 907.0
+offset_top = 11.0
+offset_right = 1072.0
+offset_bottom = 39.0
+text = "Gold:"
+label_settings = SubResource("LabelSettings_ahhtf")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
