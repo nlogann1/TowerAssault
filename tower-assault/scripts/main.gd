@@ -17,6 +17,8 @@ var mobs_spawned_in_wave = 0
 var mobs_remaining_in_wave = 0
 var wave_clear_bonus = 50
 
+var mob_attack_slot_radius = 150.0
+
 # The "recipe book" for waves
 var wave_data = [
 	{ "mob_count": 5, "mob_delay": 2.0 },  # Wave 1
@@ -105,6 +107,11 @@ func _on_mob_timer_timeout():
 	var random_spawn_point = spawn_points.pick_random()
 	mob.global_position = random_spawn_point.global_position
 	mob.target_position = $Base.global_position
+	
+	var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(30.0, mob_attack_slot_radius)
+	mob.target_attack_position = $Base.global_position + offset
+	
+	
 
 	add_child(mob)
 	mob.died.connect(_on_mob_died)

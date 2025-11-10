@@ -1,10 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj7tdcte2r8rx"]
+[gd_scene load_steps=12 format=3 uid="uid://bj7tdcte2r8rx"]
 
 [ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_bsing"]
-[ext_resource type="Texture2D" uid="uid://dieitjija6gfs" path="res://assets/Monster_gruen.png" id="2_bsing"]
+[ext_resource type="Texture2D" uid="uid://d1xj5sqptwveq" path="res://assets/GiantRoyalScarab.png" id="2_bsing"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4cuo"]
+atlas = ExtResource("2_bsing")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71rcx"]
+atlas = ExtResource("2_bsing")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsfyf"]
+atlas = ExtResource("2_bsing")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ps3"]
+atlas = ExtResource("2_bsing")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebxvl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4cuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71rcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsfyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ps3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
-radius = 32.0
+radius = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsing"]
 bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
@@ -18,24 +54,28 @@ radius = 80.0
 [node name="mob" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_bsing")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2.861023e-06)
-scale = Vector2(0.098946474, 0.1328125)
-texture = ExtResource("2_bsing")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.7683716e-07, 4.7683716e-07)
+scale = Vector2(1.7747366, 1.783203)
+sprite_frames = SubResource("SpriteFrames_ebxvl")
+animation = &"walk"
+frame_progress = 0.18179505
+speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s7bn3")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -48.0
-offset_top = -47.0
-offset_right = 47.0
-offset_bottom = -35.0
+offset_left = -14.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = -10.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bsing")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d4cuo")
 max_value = 10.0
 value = 5.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemies"]]
 
