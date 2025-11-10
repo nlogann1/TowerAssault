@@ -7,13 +7,18 @@ signal spawn_soldier
 var soldier_cost = 25
 var tower_cost = 50
 
+var countdown_timer = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$BuildTower.hide()
+	$WaveCountdownLabel.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+	if countdown_timer:
+		var time_left = ceil(countdown_timer.time_left)
+		$WaveCountdownLabel.text = "Next Wave in: " + str(time_left)
 
 func show_message(text):
 	$Message.text = text
@@ -71,3 +76,11 @@ func check_button_costs(current_currency):
 		$BuildTower.disabled = false
 	else:
 		$BuildTower.disabled = true
+
+func start_wave_countdown(timer_node):
+	countdown_timer = timer_node
+	$WaveCountdownLabel.show()
+
+func stop_wave_countdown():
+	countdown_timer = null
+	$WaveCountdownLabel.hide()

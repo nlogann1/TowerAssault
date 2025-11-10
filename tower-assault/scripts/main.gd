@@ -12,6 +12,20 @@ var tower_cost = 50
 var mouse_pos
 var can_build = true
 
+var current_wave = 0
+var mobs_spawned_in_wave = 0
+var mobs_remaining_in_wave = 0
+var wave_clear_bonus = 50
+
+# The "recipe book" for waves
+var wave_data = [
+	{ "mob_count": 5, "mob_delay": 2.0 },  # Wave 1
+	{ "mob_count": 8, "mob_delay": 1.5 },  # Wave 2
+	{ "mob_count": 12, "mob_delay": 1.0 }, # Wave 3
+	{ "mob_count": 15, "mob_delay": 0.8 }  # Wave 4
+]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HUD.spawn_soldier.connect(_on_hud_spawn_soldier)
@@ -33,6 +47,9 @@ func new_game():
 	build_tower_display = false
 	currency = 500
 	
+	current_wave = 0 # Reset wave count
+	
+
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.update_currency(currency)
@@ -43,16 +60,50 @@ func new_game():
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$NextWaveTimer.stop() # Stop the countdown timer
 	$HUD.show_game_over()
 
-func _on_mob_timer_timeout():
-	var mob = mob_scene.instantiate()
+# --- Wave Spawning Functions ---
 
+func start_next_wave():
+	# Stop if we've run out of waves
+	if current_wave >= wave_data.size():
+		print("YOU WIN!")
+		$MobTimer.stop()
+		game_over() # Or show a "You Win" screen
+		return
+
+	# Get the "recipe" for the current wave
+	var wave = wave_data[current_wave]
+	
+	mobs_spawned_in_wave = 0
+	mobs_remaining_in_wave = wave.mob_count
+	
+	# Configure the MobTimer based on the recipe
+	$MobTimer.wait_time = wave.mob_delay
+	$MobTimer.start()
+	
+	$HUD.show_message("Wave " + str(current_wave + 1))
+	
+	current_wave += 1
+
+
+func _on_mob_timer_timeout():
+	# Get the "recipe" for the *last* wave we started
+	var wave = wave_data[current_wave - 1] 
+
+	# Check if we're done spawning this wave
+	if mobs_spawned_in_wave >= wave.mob_count:
+		$MobTimer.stop() # Wave is fully spawned, stop this timer
+		return
+	
+	# If not done, spawn a mob
+	mobs_spawned_in_wave += 1
+	
+	var mob = mob_scene.instantiate()
 	var spawn_points = $SpawnPoints.get_children()
 	var random_spawn_point = spawn_points.pick_random()
-	# Set the mob's starting position
 	mob.global_position = random_spawn_point.global_position
-	# We tell the mob where to go.
 	mob.target_position = $Base.global_position
 
 	add_child(mob)
@@ -87,6 +138,12 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+	start_next_wave() # Start the first wave
+	
+# This runs after the 15-second build phase
+func _on_next_wave_timer_timeout():
+	$HUD.stop_wave_countdown()
+	start_next_wave()
 
 func _on_build_zone_mouse_entered() -> void:
 	can_build = true
@@ -114,3 +171,20 @@ func _on_mob_died(reward):
 	currency += reward
 	$HUD.update_currency(currency)
 	$HUD.check_button_costs(currency)
+	
+	mobs_remaining_in_wave -= 1
+	
+	# Check if all spawned mobs are dead
+	if mobs_remaining_in_wave <= 0:
+		print("WAVE CLEARED!")
+		
+		# Give bonus, update HUD, and start the countdown
+		currency += wave_clear_bonus
+		$HUD.update_currency(currency)
+		$HUD.check_button_costs(currency)
+		$HUD.show_message("Wave Cleared! +$" + str(wave_clear_bonus))
+		
+		$HUD.start_wave_countdown($NextWaveTimer)
+		$NextWaveTimer.start()
+		
+		
