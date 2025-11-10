@@ -3,6 +3,8 @@ extends Node
 @export var mob_scene: PackedScene
 @export var tower_scene: PackedScene
 @export var soldier_scene: PackedScene
+@export var ghoul_mob_scene: PackedScene
+
 var score
 var lives
 var build_tower_display
@@ -21,10 +23,10 @@ var mob_attack_slot_radius = 150.0
 
 # The "recipe book" for waves
 var wave_data = [
-	{ "mob_count": 5, "mob_delay": 2.0 },  # Wave 1
-	{ "mob_count": 8, "mob_delay": 1.5 },  # Wave 2
-	{ "mob_count": 12, "mob_delay": 1.0 }, # Wave 3
-	{ "mob_count": 15, "mob_delay": 0.8 }  # Wave 4
+	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },  # Wave 1
+	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },  # Wave 2
+	{ "mob_type": "ghoul", "mob_count": 3, "mob_delay": 3.0 },    # Wave 3 (Tanks!)
+	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 } # Wave 4
 ]
 
 
@@ -102,7 +104,15 @@ func _on_mob_timer_timeout():
 	# If not done, spawn a mob
 	mobs_spawned_in_wave += 1
 	
-	var mob = mob_scene.instantiate()
+	#What mobs to spawn depending on wave
+	var mob_to_spawn = mob_scene # Default to the normal mob
+
+	if wave.mob_type == "ghoul":
+		mob_to_spawn = ghoul_mob_scene
+	
+	var mob = mob_to_spawn.instantiate()
+	
+	
 	var spawn_points = $SpawnPoints.get_children()
 	var random_spawn_point = spawn_points.pick_random()
 	mob.global_position = random_spawn_point.global_position

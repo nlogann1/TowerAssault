@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c56j7dt1ny8iy"]
+[gd_scene load_steps=11 format=3 uid="uid://c56j7dt1ny8iy"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://clqcu0bijloev" path="res://scenes/archer.tscn" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bd5rmbtjdhobj" path="res://assets/game_background_4.png" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://rvughh3loyib" path="res://scenes/soldier.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://bp6o45xlmi16w" path="res://scenes/ghoul_mob.tscn" id="5_85g3d"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://lpfn3740ojbq" path="res://assets/d2x297b-54f069b5-efef-407c-8bb4-bf81f4b547f4.png" id="7_o6xl0"]
@@ -17,6 +18,7 @@ script = ExtResource("1_tbgi4")
 mob_scene = ExtResource("2_jyhfs")
 tower_scene = ExtResource("3_jyhfs")
 soldier_scene = ExtResource("4_tipki")
+ghoul_mob_scene = ExtResource("5_85g3d")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -38,6 +40,7 @@ one_shot = true
 [node name="BuildZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
+visible = false
 position = Vector2(187, 368)
 shape = SubResource("RectangleShape2D_jyhfs")
 
@@ -58,7 +61,7 @@ position = Vector2(1080, 416)
 position = Vector2(1080, 600)
 
 [node name="Base" parent="." instance=ExtResource("5_tefeu")]
-position = Vector2(80, 376)
+position = Vector2(80, 384)
 
 [node name="Castle" type="Sprite2D" parent="Base"]
 position = Vector2(21, 24.5)
