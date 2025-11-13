@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=5 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_oo0fn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ahhtf"]
 font_color = Color(0, 0, 0, 1)
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_5ysmq"]
+default_font = ExtResource("2_oo0fn")
+default_font_size = 26
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ahhtf")
@@ -83,6 +88,15 @@ offset_right = 1072.0
 offset_bottom = 39.0
 text = "Gold:"
 label_settings = SubResource("LabelSettings_ahhtf")
+
+[node name="WaveCountdownLabel" type="Label" parent="."]
+visible = false
+offset_left = 403.0
+offset_top = 92.0
+offset_right = 692.0
+offset_bottom = 171.0
+theme = SubResource("Theme_5ysmq")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]

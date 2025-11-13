@@ -1,38 +1,38 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj7tdcte2r8rx"]
+[gd_scene load_steps=12 format=3 uid="uid://bp6o45xlmi16w"]
 
-[ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_bsing"]
-[ext_resource type="Texture2D" uid="uid://d1xj5sqptwveq" path="res://assets/GiantRoyalScarab.png" id="2_bsing"]
+[ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_nxul1"]
+[ext_resource type="Texture2D" uid="uid://cr4uyhguwuyth" path="res://assets/SandGhoul.png" id="2_nxul1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d4cuo"]
-atlas = ExtResource("2_bsing")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kp82"]
+atlas = ExtResource("2_nxul1")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_71rcx"]
-atlas = ExtResource("2_bsing")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xvfm"]
+atlas = ExtResource("2_nxul1")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xsfyf"]
-atlas = ExtResource("2_bsing")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy76d"]
+atlas = ExtResource("2_nxul1")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8ps3"]
-atlas = ExtResource("2_bsing")
+[sub_resource type="AtlasTexture" id="AtlasTexture_y38lo"]
+atlas = ExtResource("2_nxul1")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ebxvl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d4cuo")
+"texture": SubResource("AtlasTexture_4kp82")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_71rcx")
+"texture": SubResource("AtlasTexture_5xvfm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xsfyf")
+"texture": SubResource("AtlasTexture_jy76d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h8ps3")
+"texture": SubResource("AtlasTexture_y38lo")
 }],
 "loop": true,
 "name": &"walk",
@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
-radius = 8.0
+radius = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsing"]
 bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
@@ -49,17 +49,21 @@ bg_color = Color(0.21950099, 0.21950105, 0.21950087, 1)
 bg_color = Color(0.77855855, 0, 0.21428034, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bsing"]
-radius = 96.0
+radius = 80.0
 
 [node name="mob" type="CharacterBody2D" groups=["enemies"]]
-script = ExtResource("1_bsing")
+script = ExtResource("1_nxul1")
+speed = 50.0
+health = 400.0
+currency_reward = 75
+attack_damage = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4.7683716e-07, 4.7683716e-07)
 scale = Vector2(1.7747366, 1.783203)
 sprite_frames = SubResource("SpriteFrames_ebxvl")
 animation = &"walk"
-frame_progress = 0.23866369
+frame_progress = 0.39149654
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,30 +1,41 @@
 extends CharacterBody2D
 
 signal died(reward)
-var speed = 100.0
-var health = 200.0
-var currency_reward = 50
-var target_position = Vector2.ZERO # This is the main Base
+@export var speed = 100.0
+@export var health = 200.0
+@export var currency_reward = 50
+@export var attack_damage = 5.0
 
-var attack_damage = 5.0
+var target_position = Vector2.ZERO # This is the main Base
+var target_attack_position = Vector2.ZERO # This is our unique "slot"
+
 var is_in_combat = false
 var attack_target = null
 
 @onready var health_bar = $HealthBar
 @onready var attack_timer = $AttackTimer
+@onready var anim_sprite = $AnimatedSprite2D
 
 func _ready():
 	health_bar.max_value = health
 	health_bar.value = health
+	anim_sprite.play("walk")
 
 func _physics_process(delta):
-
 	if is_in_combat:
 		velocity = Vector2.ZERO # Stop moving
 	else:
-		# Move towards the base
-		var direction = global_position.direction_to(target_position)
+		# Move towards our unique attack slot
+		var direction = global_position.direction_to(target_attack_position)
 		velocity = direction * speed
+	
+	# Check the direction of movement
+		if velocity.x > 0:
+			# Moving right, so face right (don't flip)
+			anim_sprite.flip_h = false
+		elif velocity.x < 0:
+			# Moving left, so face left (flip)
+			anim_sprite.flip_h = true
 	
 	move_and_slide()
 
