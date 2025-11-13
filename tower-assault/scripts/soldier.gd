@@ -59,7 +59,6 @@ func _physics_process(_delta):
 			
 	move_and_slide()
 
-
 func find_nearest_target():
 	var nearest_mob = null
 	var min_distance = INF 
@@ -88,7 +87,6 @@ func find_nearest_target():
 		# Our old target is dead, clear it
 		target_monster = null
 		target_attack_position = Vector2.ZERO
-
 
 func take_damage(amount):
 	health -= amount

@@ -57,7 +57,6 @@ func cancel_build_tower():
 func _on_message_timer_timeout():
 	$Message.hide()
 
-
 func _on_spawn_soldier_button_pressed() -> void:
 	spawn_soldier.emit()
 

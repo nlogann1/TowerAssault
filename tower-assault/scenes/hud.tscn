@@ -17,9 +17,11 @@ script = ExtResource("1_ahhtf")
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
 
 [node name="LivesLabel" type="Label" parent="."]
+visible = false
 offset_top = 25.0
 offset_right = 40.0
 offset_bottom = 48.0
@@ -69,10 +71,6 @@ button_pressed = true
 text = "Build
 Tower"
 
-[node name="MessageTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="SpawnSoldierButton" type="Button" parent="."]
 offset_left = 1017.0
 offset_top = 390.0
@@ -100,5 +98,5 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
-[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
 [connection signal="pressed" from="SpawnSoldierButton" to="." method="_on_spawn_soldier_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
