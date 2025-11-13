@@ -49,6 +49,7 @@ func damage_taken(amount):
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
+
 # This is a new, central function for starting a fight.
 func start_combat(target):
 	# If we are already fighting, don't switch targets
@@ -64,13 +65,16 @@ func _on_attack_range_area_entered(area):
 	if area.is_in_group("base"):
 		start_combat(area)
 
+
 # This is the function for detecting Soldiers (which are CharacterBody2D)
 func _on_attack_range_body_entered(body):
 	if body.is_in_group("soldiers"):
 		start_combat(body)
 
+
 # Mobs attack timer
 func _on_attack_timer_timeout():
+
 	if is_instance_valid(attack_target):
 		attack_target.take_damage(attack_damage)
 		attack_timer.start() # Attack again
