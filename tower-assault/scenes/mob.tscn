@@ -79,7 +79,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["enemies"]]
 
-[node name="AttackRange" type="Area2D" parent="."]
+[node name="AttackRange" type="Area2D" parent="." groups=["enemies"]]
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]

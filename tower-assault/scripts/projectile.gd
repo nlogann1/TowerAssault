@@ -1,7 +1,7 @@
 extends Area2D
 
-var speed = 350
-var damage = 2
+var speed = 400
+var damage = 5
 var passthrough = false
 
 # Called when the node enters the scene tree for the first time.

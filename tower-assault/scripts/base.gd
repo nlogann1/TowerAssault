@@ -37,6 +37,9 @@ func _ready():
 		[castle_2_full, castle_2_damaged, castle_2_broken], # Level 1
 		[castle_3_full, castle_3_damaged, castle_3_broken]  # Level 2
 	]
+	
+	# Initial sprite
+	sprite.texture = castle_textures[0][0]
 
 func take_damage(amount):
 	# Don't track health here. main.gd will do it.
@@ -46,9 +49,9 @@ func take_damage(amount):
 	# We don't check for <= 0 here. main.gd will handle it.
 
 # This is the new function main.gd will call
-func update_visuals(level, current_lives, max_lives):
+func update_visuals(level, current_health, max_health):
 	# 1. Determine which damage state to show
-	var health_percent = float(current_lives) / float(max_lives)
+	var health_percent = float(current_health) / float(max_health)
 	var damage_index = 0 # Default to full health
 	
 	if health_percent < 0.66 and health_percent > 0.33:
@@ -60,3 +63,7 @@ func update_visuals(level, current_lives, max_lives):
 	# level = 0, 1, or 2
 	# damage_index = 0, 1, or 2
 	sprite.texture = castle_textures[level][damage_index]
+
+func reset():
+	health = 10
+	sprite.texture = castle_textures[0][0]
