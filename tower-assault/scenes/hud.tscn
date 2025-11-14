@@ -98,7 +98,22 @@ offset_bottom = 171.0
 theme = SubResource("Theme_5ysmq")
 horizontal_alignment = 1
 
+[node name="UpgradeBaseButton" type="Button" parent="."]
+offset_left = 1009.0
+offset_top = 524.0
+offset_right = 1084.0
+offset_bottom = 578.0
+text = "Upgrade
+Base"
+
+[node name="UpgradeCostLabel" type="Label" parent="."]
+offset_left = 958.0
+offset_top = 472.0
+offset_right = 1074.0
+offset_bottom = 512.0
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
 [connection signal="pressed" from="SpawnSoldierButton" to="." method="_on_spawn_soldier_button_pressed"]
+[connection signal="pressed" from="UpgradeBaseButton" to="." method="_on_upgrade_base_button_pressed"]
