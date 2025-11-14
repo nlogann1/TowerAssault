@@ -3,9 +3,11 @@ extends CanvasLayer
 signal start_game
 signal build_tower
 signal spawn_soldier
+signal upgrade_base
 
 var soldier_cost = 25
 var tower_cost = 50
+var base_upgrade_cost = 100
 
 var countdown_timer = null
 
@@ -76,6 +78,13 @@ func check_button_costs(current_currency):
 		$BuildTower.disabled = false
 	else:
 		$BuildTower.disabled = true
+		
+	if current_currency >= base_upgrade_cost:
+		$UpgradeBaseButton.disabled = false
+	else:
+		$UpgradeBaseButton.disabled = true
+	
+	$UpgradeCostLabel.text = "Upgrade: $" + str(base_upgrade_cost)
 
 func start_wave_countdown(timer_node):
 	countdown_timer = timer_node
@@ -84,3 +93,15 @@ func start_wave_countdown(timer_node):
 func stop_wave_countdown():
 	countdown_timer = null
 	$WaveCountdownLabel.hide()
+
+func update_upgrade_cost(new_cost):
+	base_upgrade_cost = new_cost
+	if new_cost >= 99999: # A high number to show it's maxed out
+		$UpgradeCostLabel.text = "MAXED"
+		$UpgradeBaseButton.disabled = true
+	else:
+		$UpgradeCostLabel.text = "Upgrade: $" + str(new_cost)
+
+
+func _on_upgrade_base_button_pressed() -> void:
+	upgrade_base.emit()

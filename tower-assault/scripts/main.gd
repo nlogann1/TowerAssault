@@ -8,6 +8,8 @@ extends Node
 var score
 var lives
 var build_tower_display
+var max_lives = 10
+
 var currency = 0
 var soldier_cost = 25
 var tower_cost = 50
@@ -21,6 +23,10 @@ var wave_clear_bonus = 50
 
 var mob_attack_slot_radius = 150.0
 
+var castle_level = 0
+var base_upgrade_costs = [150, 400, 99999]
+
+
 # The "recipe book" for waves
 var wave_data = [
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },  # Wave 1
@@ -33,6 +39,7 @@ var wave_data = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HUD.spawn_soldier.connect(_on_hud_spawn_soldier)
+	$HUD.upgrade_base.connect(_on_hud_upgrade_base_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
@@ -47,7 +54,8 @@ func _process(delta: float):
 
 func new_game():
 	score = 0
-	lives = 10
+	max_lives = 10
+	lives = max_lives
 	build_tower_display = false
 	currency = 500
 	
@@ -56,11 +64,50 @@ func new_game():
 
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_lives(lives)
 	$HUD.update_currency(currency)
+	$HUD.update_upgrade_cost(base_upgrade_costs[castle_level])
 	$HUD.check_button_costs(currency)
+	$Base.update_visuals(castle_level, lives, max_lives)
 	$HUD.show_message("Get Ready!")
 	get_tree().call_group("mobs", "queue_free")
 	
+func _on_hud_upgrade_base_pressed():
+	var current_cost = base_upgrade_costs[castle_level]
+	
+	# Check if we can afford it and if we're not max level
+	if currency >= current_cost and castle_level < base_upgrade_costs.size() - 1:
+		# Spend money
+		currency -= current_cost
+		
+		# Level up
+		castle_level += 1
+		
+		# Heal the base on upgrade!
+		lives = max_lives 
+		
+		# Get the *next* upgrade cost
+		var next_cost = base_upgrade_costs[castle_level]
+		
+		# Update the HUD
+		$HUD.update_currency(currency)
+		$HUD.update_lives(lives)
+		$HUD.update_upgrade_cost(next_cost)
+		$HUD.check_button_costs(currency)
+		
+		# Update the Base sprite
+		$Base.update_visuals(castle_level, lives, max_lives)
+
+func _on_base_base_hit():
+	lives -= 1
+	$HUD.update_lives(lives)
+	
+	# Update the sprite to show the new damage
+	$Base.update_visuals(castle_level, lives, max_lives)
+	
+	if lives <= 0:
+		game_over()
+
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
