@@ -1,32 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwjv8d0rdpihv"]
+[gd_scene load_steps=12 format=3 uid="uid://bwjv8d0rdpihv"]
 
 [ext_resource type="Script" uid="uid://c4mpehc4kar40" path="res://scripts/base.gd" id="1_pvqg0"]
+[ext_resource type="Texture2D" uid="uid://eyta50tkjckc" path="res://assets/CastleAssets/Asset 21.png" id="2_jn13j"]
+[ext_resource type="Texture2D" uid="uid://vayb63110pod" path="res://assets/CastleAssets/Asset 22.png" id="3_6irmp"]
+[ext_resource type="Texture2D" uid="uid://rm6tkm4g1fcf" path="res://assets/CastleAssets/Asset 23.png" id="4_dmaw2"]
+[ext_resource type="Texture2D" uid="uid://d044e3o4xniil" path="res://assets/CastleAssets/Asset 24.png" id="5_1xxg6"]
+[ext_resource type="Texture2D" uid="uid://v5bmpvyu8wv4" path="res://assets/CastleAssets/Asset 25.png" id="6_517kj"]
+[ext_resource type="Texture2D" uid="uid://dgxgnsy3txi2b" path="res://assets/CastleAssets/Asset 26.png" id="7_ot4hf"]
+[ext_resource type="Texture2D" uid="uid://cxg3d75obixuf" path="res://assets/CastleAssets/Asset 27.png" id="8_vciil"]
+[ext_resource type="Texture2D" uid="uid://cvjedc23nws56" path="res://assets/CastleAssets/Asset 28.png" id="9_ycryd"]
+[ext_resource type="Texture2D" uid="uid://bl4g8rbx5layi" path="res://assets/CastleAssets/Asset 29.png" id="10_ystrd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvqg0"]
 size = Vector2(152, 240)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvqg0"]
-bg_color = Color(1, 0.3438021, 0.27205622, 1)
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 6
 
 [node name="Base" type="Area2D" groups=["base"]]
 position = Vector2(80, 352)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_pvqg0")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+castle_1_full = ExtResource("2_jn13j")
+castle_1_damaged = ExtResource("3_6irmp")
+castle_1_broken = ExtResource("4_dmaw2")
+castle_2_full = ExtResource("5_1xxg6")
+castle_2_damaged = ExtResource("6_517kj")
+castle_2_broken = ExtResource("7_ot4hf")
+castle_3_full = ExtResource("8_vciil")
+castle_3_damaged = ExtResource("9_ycryd")
+castle_3_broken = ExtResource("10_ystrd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pvqg0")
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = 384.0
-offset_top = -360.0
-offset_right = 564.0
-offset_bottom = -317.0
-theme_override_colors/font_color = Color(0, 0, 0.007843138, 1)
-theme_override_colors/font_outline_color = Color(0.972549, 0, 0, 1)
-theme_override_styles/background = SubResource("StyleBoxFlat_pvqg0")
+[node name="CastleSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+flip_h = true
