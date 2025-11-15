@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxtqkb4e8dqic"]
+
+[ext_resource type="Script" uid="uid://cwd746qd8a6tu" path="res://scripts/pausemenu.gd" id="1_alvrn"]
+[ext_resource type="Texture2D" uid="uid://bc12y3oc7i0js" path="res://assets/resume_button.png" id="1_eptsf"]
+[ext_resource type="Texture2D" uid="uid://d0yix2l52c48x" path="res://assets/levels_button.png" id="2_alvrn"]
+[ext_resource type="Texture2D" uid="uid://yb51jp64avgy" path="res://assets/settings_button.png" id="3_3gyci"]
+[ext_resource type="Texture2D" uid="uid://cs2y1fipj1uc6" path="res://assets/restart_button.png" id="4_e0wba"]
+[ext_resource type="Texture2D" uid="uid://w47le0nakkj7" path="res://assets/quit_button.png" id="5_klbn3"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+offset = Vector2(500, 300)
+transform = Transform2D(1, 0, 0, 1, 500, 300)
+script = ExtResource("1_alvrn")
+
+[node name="ResumeButton" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 84.0
+offset_bottom = 18.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="ResumeSprite" type="Sprite2D" parent="ResumeButton"]
+position = Vector2(41, 8)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_eptsf")
+
+[node name="LevelsButton" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 23.0
+offset_right = 84.0
+offset_bottom = 39.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="LevelsSprite" type="Sprite2D" parent="LevelsButton"]
+position = Vector2(41.00003, 8)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_alvrn")
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 44.0
+offset_right = 84.0
+offset_bottom = 60.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="SettingsSprite" type="Sprite2D" parent="SettingsButton"]
+position = Vector2(41.00003, 8)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_3gyci")
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 13.0
+offset_top = 66.0
+offset_right = 75.0
+offset_bottom = 82.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="RestartSprite" type="Sprite2D" parent="RestartButton"]
+position = Vector2(31.00003, 8)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_e0wba")
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 88.0
+offset_right = 67.0
+offset_bottom = 104.0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="QuitSprite" type="Sprite2D" parent="QuitButton"]
+position = Vector2(23.00003, 8)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_klbn3")
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="LevelsButton" to="." method="_on_levels_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

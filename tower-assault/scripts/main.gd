@@ -49,9 +49,15 @@ func _process(delta: float):
 		if can_build:
 			build_tower(mouse_pos)
 			can_build = false
-	if Input.is_action_just_pressed(&"escape") and build_tower_display:
-		build_tower_display = false
-		$HUD.cancel_build_tower()
+	if Input.is_action_just_pressed(&"escape"):
+		if build_tower_display:
+			build_tower_display = false
+			$HUD.cancel_build_tower()
+		else:
+			if paused:
+				$HUD.pause(false)
+			else:
+				$HUD.pause(true)
 
 func new_game():
 	score = 0

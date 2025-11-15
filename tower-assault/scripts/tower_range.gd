@@ -4,6 +4,7 @@ extends Area2D
 
 var inRange = []
 var canAttack = true
+var paused = false
 
 # This line finds the 'ArcherSprite' node, which is a sibling
 @onready var anim_sprite = get_parent().get_node("ArcherSprite")
@@ -51,3 +52,11 @@ func _on_body_exited(body:Node2D) -> void:
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
 	anim_sprite.play("idle")
+
+func pause_me():
+	paused = true
+	$AttackTimer.paused = true
+
+func unpause_me():
+	paused = false
+	$AttackTimer.paused = false

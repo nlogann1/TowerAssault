@@ -135,7 +135,7 @@ scale = Vector2(2.125, 1.8333334)
 sprite_frames = SubResource("SpriteFrames_811sq")
 animation = &"idle"
 
-[node name="tower_range" type="Area2D" parent="."]
+[node name="tower_range" type="Area2D" parent="." groups=["soldiers"]]
 script = ExtResource("2_ktxwe")
 projectile_scene = ExtResource("2_orquw")
 
