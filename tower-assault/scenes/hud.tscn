@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=14 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
 [ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_oo0fn"]
 [ext_resource type="Texture2D" uid="uid://dqd5ggxhxjs8k" path="res://assets/Pixel1_Healthbar_0002_pixel1_border.png" id="3_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://dh7yddvg6mlie" path="res://assets/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://djmrewxt6er3b" path="res://assets/Action_panel.png" id="5_047uy"]
+[ext_resource type="Texture2D" uid="uid://dkr01odafkhtc" path="res://assets/32x32.png" id="6_5pdws"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font_color = Color(0, 0, 0, 1)
@@ -18,6 +20,18 @@ default_font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_5ysmq"]
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd3ao"]
+atlas = ExtResource("5_047uy")
+region = Rect2(11.069767, 42.878548, 170.14885, 21.348267)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i1j5"]
+atlas = ExtResource("6_5pdws")
+region = Rect2(127.38582, 0.21988773, 32.993027, 31.599747)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_047uy"]
+atlas = ExtResource("6_5pdws")
+region = Rect2(352.03113, 3168.7866, 33.93628, 29.519531)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ahhtf")
@@ -50,15 +64,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -71.0
-offset_right = 23.0
-offset_bottom = -40.0
+offset_left = -27.0
+offset_top = -253.0
+offset_right = 19.0
+offset_bottom = -222.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Start"
 
 [node name="BuildArcherButton" type="Button" parent="."]
+visible = false
 offset_left = 152.0
 offset_top = 666.0
 offset_right = 212.0
@@ -72,14 +87,6 @@ Archer"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-
-[node name="SpawnSoldierButton" type="Button" parent="."]
-offset_left = 82.0
-offset_top = 666.0
-offset_right = 144.0
-offset_bottom = 720.0
-text = "Spawn
-Soldier"
 
 [node name="CurrencyLabel" type="Label" parent="."]
 offset_right = 98.0
@@ -139,10 +146,34 @@ texture_under = ExtResource("3_6fi6k")
 texture_progress = ExtResource("4_uo2fv")
 texture_progress_offset = Vector2(0, 12)
 
+[node name="Inventory" type="TextureRect" parent="."]
+offset_left = 576.0
+offset_top = 650.0
+offset_right = 1080.0
+offset_bottom = 709.0
+texture = SubResource("AtlasTexture_hd3ao")
+
+[node name="SpawnSoldierIconButton" type="TextureButton" parent="."]
+offset_left = 598.0
+offset_top = 670.0
+offset_right = 634.0
+offset_bottom = 703.0
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_0i1j5")
+
+[node name="SpawnArcherButton" type="TextureButton" parent="."]
+offset_left = 645.0
+offset_top = 673.0
+offset_right = 678.0
+offset_bottom = 709.0
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_047uy")
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildArcherButton" to="." method="_on_build_tower_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
-[connection signal="pressed" from="SpawnSoldierButton" to="." method="_on_spawn_soldier_button_pressed"]
 [connection signal="pressed" from="UpgradeBaseButton" to="." method="_on_upgrade_base_button_pressed"]
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="FreeGoldButton" to="." method="_on_free_gold_button_pressed"]
+[connection signal="pressed" from="SpawnSoldierIconButton" to="." method="_on_spawn_soldier_button_pressed"]
+[connection signal="pressed" from="SpawnArcherButton" to="." method="_on_build_tower_pressed"]
