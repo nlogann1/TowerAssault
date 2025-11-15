@@ -10,10 +10,10 @@ var target_attack_position = Vector2.ZERO
 
 enum {IDLE, WALK, ATTACK}
 var state = IDLE
+var paused = false
 
 # Attack range here
 @export var attack_range: float = 60.0
-
 
 @onready var anim_sprite = $AnimatedSprite2D
 @onready var attack_timer = $AttackTimer
@@ -24,41 +24,39 @@ func _ready():
 	health_bar.max_value = health
 	health_bar.value = health
 
-
 func _physics_process(_delta):
-	
-	if not is_instance_valid(target_monster):
-		find_nearest_target()
-		state = IDLE
-	else:
-		# We check the distance to the mob
-		var distance_to_mob = global_position.distance_to(target_monster.global_position)
-		
-		if distance_to_mob > attack_range:
-			# We are not in attack range, so we walk to our slot
-			state = WALK
+	if not paused:
+		if not is_instance_valid(target_monster):
+			find_nearest_target()
+			state = IDLE
 		else:
-			# We are in attack range
-			if state != ATTACK:
-				state = ATTACK
-				do_attack()
-	
-	match state:
-		IDLE:
-			velocity = Vector2.ZERO
-			anim_sprite.play("idle")
+			# We check the distance to the mob
+			var distance_to_mob = global_position.distance_to(target_monster.global_position)
 			
-		WALK:
-			# We walk towards our unique slot, not the mob's center
-			velocity = global_position.direction_to(target_attack_position) * speed
-			anim_sprite.play("walk")
-			anim_sprite.flip_h = (velocity.x < 0)
-			
-		ATTACK:
-			velocity = Vector2.ZERO
-			
-	move_and_slide()
-
+			if distance_to_mob > attack_range:
+				# We are not in attack range, so we walk to our slot
+				state = WALK
+			else:
+				# We are in attack range
+				if state != ATTACK:
+					state = ATTACK
+					do_attack()
+		
+		match state:
+			IDLE:
+				velocity = Vector2.ZERO
+				anim_sprite.play("idle")
+				
+			WALK:
+				# We walk towards our unique slot, not the mob's center
+				velocity = global_position.direction_to(target_attack_position) * speed
+				anim_sprite.play("walk")
+				anim_sprite.flip_h = (velocity.x < 0)
+				
+			ATTACK:
+				velocity = Vector2.ZERO
+				
+		move_and_slide()
 
 func find_nearest_target():
 	var nearest_mob = null
@@ -89,13 +87,11 @@ func find_nearest_target():
 		target_monster = null
 		target_attack_position = Vector2.ZERO
 
-
 func take_damage(amount):
 	health -= amount
 	health_bar.value = health
 	if health <= 0:
 		queue_free()
-
 
 func do_attack():
 	if is_instance_valid(target_monster):
@@ -114,12 +110,18 @@ func do_attack():
 	else:
 		state = IDLE
 
-
 func _on_attack_timer_timeout():
 	do_attack()
-
 
 func _on_animated_sprite_2d_animation_finished():
 	if anim_sprite.animation == "attack":
 		# Go to idle while waiting for the timer
 		anim_sprite.play("idle")
+
+func pause_me():
+	paused = true
+	$AttackTimer.paused = true
+
+func unpause_me():
+	paused = false
+	$AttackTimer.paused = false

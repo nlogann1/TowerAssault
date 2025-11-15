@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(450, 392)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=["main"]]
 script = ExtResource("1_tbgi4")
 mob_scene = ExtResource("2_jyhfs")
 tower_scene = ExtResource("3_jyhfs")

@@ -12,6 +12,8 @@ var target_attack_position = Vector2.ZERO # This is our unique "slot"
 var is_in_combat = false
 var attack_target = null
 
+var paused = false
+
 @onready var health_bar = $HealthBar
 @onready var attack_timer = $AttackTimer
 @onready var anim_sprite = $AnimatedSprite2D
@@ -22,22 +24,23 @@ func _ready():
 	anim_sprite.play("walk")
 
 func _physics_process(delta):
-	if is_in_combat:
-		velocity = Vector2.ZERO # Stop moving
-	else:
-		# Move towards our unique attack slot
-		var direction = global_position.direction_to(target_attack_position)
-		velocity = direction * speed
-	
-	# Check the direction of movement
-		if velocity.x > 0:
-			# Moving right, so face right (don't flip)
-			anim_sprite.flip_h = false
-		elif velocity.x < 0:
-			# Moving left, so face left (flip)
-			anim_sprite.flip_h = true
-	
-	move_and_slide()
+	if not paused:
+		if is_in_combat:
+			velocity = Vector2.ZERO # Stop moving
+		else:
+			# Move towards our unique attack slot
+			var direction = global_position.direction_to(target_attack_position)
+			velocity = direction * speed
+		
+		# Check the direction of movement
+			if velocity.x > 0:
+				# Moving right, so face right (don't flip)
+				anim_sprite.flip_h = false
+			elif velocity.x < 0:
+				# Moving left, so face left (flip)
+				anim_sprite.flip_h = true
+		
+		move_and_slide()
 
 func damage_taken(amount):
 	health -= amount
@@ -78,3 +81,11 @@ func _on_attack_timer_timeout():
 		# Our target is dead, stop fighting and start moving again
 		is_in_combat = false
 		attack_target = null
+
+func pause_me():
+	paused = true
+	$AttackTimer.paused = true
+
+func unpause_me():
+	paused = false
+	$AttackTimer.paused = false
