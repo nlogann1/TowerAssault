@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="5_tefeu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(378, 576)
+size = Vector2(450, 392)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tbgi4")
@@ -39,8 +39,7 @@ one_shot = true
 [node name="BuildZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
-visible = false
-position = Vector2(187, 368)
+position = Vector2(223, 460)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="Sprite2D" type="Sprite2D" parent="BuildZone"]
@@ -60,7 +59,7 @@ position = Vector2(1080, 416)
 position = Vector2(1080, 600)
 
 [node name="Base" parent="." instance=ExtResource("5_tefeu")]
-position = Vector2(80, 384)
+position = Vector2(80, 408)
 
 [node name="NextWaveTimer" type="Timer" parent="."]
 wait_time = 15.0

@@ -6,12 +6,14 @@ extends Node
 @export var ghoul_mob_scene: PackedScene
 
 var score
-var lives
+var health
 var build_tower_display
-var max_lives = 10
+var max_health = 10
+var paused = false
 
 var currency = 0
 var soldier_cost = 25
+var soldier_spawn_offset = 0
 var tower_cost = 50
 var mouse_pos
 var can_build = true
@@ -24,8 +26,8 @@ var wave_clear_bonus = 50
 var mob_attack_slot_radius = 150.0
 
 var castle_level = 0
+var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
-
 
 # The "recipe book" for waves
 var wave_data = [
@@ -34,7 +36,6 @@ var wave_data = [
 	{ "mob_type": "ghoul", "mob_count": 3, "mob_delay": 3.0 },    # Wave 3 (Tanks!)
 	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 } # Wave 4
 ]
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,26 +55,29 @@ func _process(delta: float):
 
 func new_game():
 	score = 0
-	max_lives = 10
-	lives = max_lives
+	max_health = 10
+	health = max_health
 	build_tower_display = false
+	paused = false
 	currency = 500
 	
 	current_wave = 0 # Reset wave count
 	
-
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.update_lives(lives)
+	$HUD.update_health(health)
 	$HUD.update_currency(currency)
 	$HUD.update_upgrade_cost(base_upgrade_costs[castle_level])
 	$HUD.check_button_costs(currency)
-	$Base.update_visuals(castle_level, lives, max_lives)
+	$Base.update_visuals(castle_level, health, max_health)
+	$Base.reset()
+	current_cost = base_upgrade_costs[0]
 	$HUD.show_message("Get Ready!")
-	get_tree().call_group("mobs", "queue_free")
-	
+	get_tree().call_group("enemies", "queue_free")
+	get_tree().call_group("soldiers", "queue_free")
+
 func _on_hud_upgrade_base_pressed():
-	var current_cost = base_upgrade_costs[castle_level]
+	current_cost = base_upgrade_costs[castle_level]
 	
 	# Check if we can afford it and if we're not max level
 	if currency >= current_cost and castle_level < base_upgrade_costs.size() - 1:
@@ -84,29 +88,30 @@ func _on_hud_upgrade_base_pressed():
 		castle_level += 1
 		
 		# Heal the base on upgrade!
-		lives = max_lives 
+		health = max_health
 		
 		# Get the *next* upgrade cost
 		var next_cost = base_upgrade_costs[castle_level]
 		
 		# Update the HUD
 		$HUD.update_currency(currency)
-		$HUD.update_lives(lives)
+		$HUD.update_health(health)
 		$HUD.update_upgrade_cost(next_cost)
 		$HUD.check_button_costs(currency)
 		
 		# Update the Base sprite
-		$Base.update_visuals(castle_level, lives, max_lives)
+		$Base.update_visuals(castle_level, health, max_health)
 
 func _on_base_base_hit():
-	lives -= 1
-	$HUD.update_lives(lives)
-	
-	# Update the sprite to show the new damage
-	$Base.update_visuals(castle_level, lives, max_lives)
-	
-	if lives <= 0:
-		game_over()
+	if not paused:
+		health -= 1
+		$HUD.update_health(health)
+		# Update the sprite to show the new damage
+		$Base.update_visuals(castle_level, health, max_health)
+		if health <= 0:
+			paused = true
+			$HUD.pause(true)
+			game_over()
 
 func game_over():
 	$ScoreTimer.stop()
@@ -138,7 +143,6 @@ func start_next_wave():
 	
 	current_wave += 1
 
-
 func _on_mob_timer_timeout():
 	# Get the "recipe" for the *last* wave we started
 	var wave = wave_data[current_wave - 1] 
@@ -159,7 +163,6 @@ func _on_mob_timer_timeout():
 	
 	var mob = mob_to_spawn.instantiate()
 	
-	
 	var spawn_points = $SpawnPoints.get_children()
 	var random_spawn_point = spawn_points.pick_random()
 	mob.global_position = random_spawn_point.global_position
@@ -167,8 +170,6 @@ func _on_mob_timer_timeout():
 	
 	var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(30.0, mob_attack_slot_radius)
 	mob.target_attack_position = $Base.global_position + offset
-	
-	
 
 	add_child(mob)
 	mob.died.connect(_on_mob_died)
@@ -194,7 +195,6 @@ func tower_button_pressed():
 	build_tower_display = true
 	# However we want the display to work
 
-
 func _on_score_timer_timeout():
 	score += 1
 	$HUD.update_score(score)
@@ -203,7 +203,7 @@ func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 	start_next_wave() # Start the first wave
-	
+
 # This runs after the 15-second build phase
 func _on_next_wave_timer_timeout():
 	$HUD.stop_wave_countdown()
@@ -225,12 +225,15 @@ func _on_hud_spawn_soldier():
 
 		# And spawn the soldier
 		var soldier = soldier_scene.instantiate()
-		soldier.global_position = $Base.global_position + Vector2(100, 0)
+		soldier.global_position = $Base.global_position + Vector2(200, soldier_spawn_offset)
 		add_child(soldier)
+		soldier_spawn_offset += 20
+		if (soldier_spawn_offset >= 200):
+			soldier_spawn_offset -= 300
 	else:
 		# Not enough money (you can add a "buzz" sound here later)
 		print("Not enough gold for a soldier!")
-	
+
 func _on_mob_died(reward):
 	currency += reward
 	$HUD.update_currency(currency)
@@ -250,5 +253,3 @@ func _on_mob_died(reward):
 		
 		$HUD.start_wave_countdown($NextWaveTimer)
 		$NextWaveTimer.start()
-		
-		
