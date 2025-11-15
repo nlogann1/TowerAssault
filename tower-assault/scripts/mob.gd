@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-signal died(reward)
+signal died
+@export var coin_scene: PackedScene
 @export var speed = 100.0
 @export var health = 200.0
 @export var currency_reward = 50
@@ -46,7 +47,8 @@ func damage_taken(amount):
 	health -= amount
 	health_bar.value = health
 	if health <= 0:
-		died.emit(currency_reward)
+		died.emit()
+		spawn_coin() # Call our new function
 		queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
@@ -81,6 +83,16 @@ func _on_attack_timer_timeout():
 		# Our target is dead, stop fighting and start moving again
 		is_in_combat = false
 		attack_target = null
+		
+func spawn_coin():
+	if coin_scene == null:
+		print("ERROR: Mob is missing its coin_scene")
+		return
+
+	var coin = coin_scene.instantiate()
+	coin.value = currency_reward # Set the coin's value
+	get_parent().add_child(coin) # Add it to the main scene
+	coin.global_position = global_position
 
 func pause_me():
 	paused = true

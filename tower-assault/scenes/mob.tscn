@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj7tdcte2r8rx"]
+[gd_scene load_steps=13 format=3 uid="uid://bj7tdcte2r8rx"]
 
 [ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_bsing"]
 [ext_resource type="Texture2D" uid="uid://d1xj5sqptwveq" path="res://assets/GiantRoyalScarab.png" id="2_bsing"]
+[ext_resource type="PackedScene" uid="uid://8s566cfkibie" path="res://scenes/coin.tscn" id="2_d4cuo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4cuo"]
 atlas = ExtResource("2_bsing")
@@ -53,6 +54,7 @@ radius = 96.0
 
 [node name="mob" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_bsing")
+coin_scene = ExtResource("2_d4cuo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4.7683716e-07, 4.7683716e-07)

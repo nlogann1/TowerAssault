@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp6o45xlmi16w"]
+[gd_scene load_steps=13 format=3 uid="uid://bp6o45xlmi16w"]
 
 [ext_resource type="Script" uid="uid://b4pec86pbxtsm" path="res://scripts/mob.gd" id="1_nxul1"]
+[ext_resource type="PackedScene" uid="uid://8s566cfkibie" path="res://scenes/coin.tscn" id="2_4kp82"]
 [ext_resource type="Texture2D" uid="uid://cr4uyhguwuyth" path="res://assets/SandGhoul.png" id="2_nxul1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kp82"]
@@ -53,6 +54,7 @@ radius = 80.0
 
 [node name="mob" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_nxul1")
+coin_scene = ExtResource("2_4kp82")
 speed = 50.0
 health = 400.0
 currency_reward = 75

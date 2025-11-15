@@ -237,11 +237,8 @@ func _on_hud_spawn_soldier():
 		# Not enough money (you can add a "buzz" sound here later)
 		print("Not enough gold for a soldier!")
 
-func _on_mob_died(reward):
-	currency += reward
-	$HUD.update_currency(currency)
-	$HUD.check_button_costs(currency)
-	
+func _on_mob_died():
+	# The coin now handles all the currency logic
 	mobs_remaining_in_wave -= 1
 	
 	# Check if all spawned mobs are dead
@@ -256,6 +253,12 @@ func _on_mob_died(reward):
 		
 		$HUD.start_wave_countdown($NextWaveTimer)
 		$NextWaveTimer.start()
+		
+# This is called by coin.gd when you mouse over it
+func add_currency(amount):
+	currency += amount
+	$HUD.update_currency(currency)
+	$HUD.check_button_costs(currency)
 
 func pause_me():
 	paused = true
