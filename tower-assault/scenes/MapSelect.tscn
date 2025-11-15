@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://87847hesl48n"]
+
+[ext_resource type="Script" uid="uid://bmvqsu5f0oyke" path="res://map_select.gd" id="1_7yywt"]
+
+[node name="MapSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7yywt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 136.0
+offset_right = 824.0
+offset_bottom = 400.0
+
+[node name="Map1Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Field Map"
+
+[node name="Map2Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Grave Yard"
+
+[node name="Map3Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dead Forest"
+
+[node name="Map4Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dusty Desert"
+
+[node name="Map5Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dark Castle"
+
+[node name="Map6Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Throne"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 600.0
+offset_right = 1008.0
+offset_bottom = 648.0
+text = "Return to Menu"

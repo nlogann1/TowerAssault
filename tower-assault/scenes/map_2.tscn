@@ -1,29 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://c56j7dt1ny8iy"]
+[gd_scene load_steps=10 format=3 uid="uid://ich82qkpf18n"]
 
-[ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://b0ai7154me5i0" path="res://scenes/archer.tscn" id="3_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://bd5rmbtjdhobj" path="res://assets/maps/game_background_4.png" id="4_tefeu"]
-[ext_resource type="PackedScene" uid="uid://rvughh3loyib" path="res://scenes/soldier.tscn" id="4_tipki"]
-[ext_resource type="PackedScene" uid="uid://bp6o45xlmi16w" path="res://scenes/ghoul_mob.tscn" id="5_85g3d"]
-[ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_5w0ad"]
+[ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_kocsa"]
+[ext_resource type="PackedScene" uid="uid://b0ai7154me5i0" path="res://scenes/archer.tscn" id="3_0a3ge"]
+[ext_resource type="PackedScene" uid="uid://rvughh3loyib" path="res://scenes/soldier.tscn" id="4_v41ee"]
+[ext_resource type="PackedScene" uid="uid://bp6o45xlmi16w" path="res://scenes/ghoul_mob.tscn" id="5_tltda"]
+[ext_resource type="Texture2D" uid="uid://dssh8o02ss7h5" path="res://assets/maps/castle.png" id="6_5w0ad"]
+[ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_6li7e"]
+[ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_tcq6v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(450, 392)
+size = Vector2(450, 368)
 
 [node name="Main" type="Node" groups=["main"]]
-script = ExtResource("1_tbgi4")
-mob_scene = ExtResource("2_jyhfs")
-tower_scene = ExtResource("3_jyhfs")
-soldier_scene = ExtResource("4_tipki")
-ghoul_mob_scene = ExtResource("5_85g3d")
+script = ExtResource("1_5w0ad")
+mob_scene = ExtResource("2_kocsa")
+tower_scene = ExtResource("3_0a3ge")
+soldier_scene = ExtResource("4_v41ee")
+ghoul_mob_scene = ExtResource("5_tltda")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(544, 359.99997)
 scale = Vector2(0.28333336, 0.3333333)
-texture = ExtResource("4_tefeu")
+texture = ExtResource("6_5w0ad")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -34,12 +34,12 @@ wait_time = 0.5
 wait_time = 2.0
 one_shot = true
 
-[node name="HUD" parent="." instance=ExtResource("5_tbgi4")]
+[node name="HUD" parent="." instance=ExtResource("7_6li7e")]
 
 [node name="BuildZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildZone"]
-position = Vector2(223, 460)
+position = Vector2(223, 472)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="Sprite2D" type="Sprite2D" parent="BuildZone"]
@@ -58,8 +58,8 @@ position = Vector2(1080, 416)
 [node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1080, 600)
 
-[node name="Base" parent="." instance=ExtResource("5_tefeu")]
-position = Vector2(80, 408)
+[node name="Base" parent="." instance=ExtResource("8_tcq6v")]
+position = Vector2(80, 440)
 
 [node name="NextWaveTimer" type="Timer" parent="."]
 wait_time = 15.0

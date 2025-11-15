@@ -12,7 +12,7 @@ func _ready():
 	scroll_animation.play()
 
 func _on_button_start_game_pressed():
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/MapSelect.tscn")
 
 func _on_button_2_quit_pressed():
 	get_tree().quit()
