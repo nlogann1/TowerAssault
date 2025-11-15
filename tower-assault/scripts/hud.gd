@@ -124,6 +124,21 @@ func _on_upgrade_base_button_pressed() -> void:
 
 func pause(state):
 	paused = state
+	if paused:
+		$PauseMenu.show()
+		paused = true
+		$PauseButton.text = "Play"
+		get_tree().call_group("enemies", "pause_me")
+		get_tree().call_group("main", "pause_me")
+		get_tree().call_group("soldiers", "pause_me")
+	else:
+		$PauseMenu.hide()
+		paused = false
+		$PauseButton.text = "Pause"
+		$PauseMenu.unpause()
+		get_tree().call_group("enemies", "unpause_me")
+		get_tree().call_group("main", "unpause_me")
+		get_tree().call_group("soldiers", "unpause_me")
 
 func hide_buttons():
 	$PauseButton.hide()
@@ -133,17 +148,9 @@ func show_buttons():
 
 func _on_pause_button_pressed():
 	if paused:
-		paused = false
-		$PauseButton.text = "Pause"
-		get_tree().call_group("enemies", "unpause_me")
-		get_tree().call_group("main", "unpause_me")
-		get_tree().call_group("soldiers", "unpause_me")
+		pause(false)
 	else:
-		paused = true
-		$PauseButton.text = "Play"
-		get_tree().call_group("enemies", "pause_me")
-		get_tree().call_group("main", "pause_me")
-		get_tree().call_group("soldiers", "pause_me")
+		pause(true)
 
 func _on_free_gold_button_pressed() -> void:
 	get_tree().call_group("main", "free_gold")

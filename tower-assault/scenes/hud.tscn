@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dh7yddvg6mlie" path="res://assets/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://djmrewxt6er3b" path="res://assets/Action_panel.png" id="5_047uy"]
 [ext_resource type="Texture2D" uid="uid://dkr01odafkhtc" path="res://assets/32x32.png" id="6_5pdws"]
+[ext_resource type="PackedScene" uid="uid://bxtqkb4e8dqic" path="res://scenes/pausemenu.tscn" id="7_uo2fv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font_color = Color(0, 0, 0, 1)
@@ -33,7 +34,8 @@ region = Rect2(127.38582, 0.21988773, 32.993027, 31.599747)
 atlas = ExtResource("6_5pdws")
 region = Rect2(352.03113, 3168.7866, 33.93628, 29.519531)
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" groups=["HUD"]]
+
 script = ExtResource("1_ahhtf")
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -145,6 +147,12 @@ value = 100.0
 texture_under = ExtResource("3_6fi6k")
 texture_progress = ExtResource("4_uo2fv")
 texture_progress_offset = Vector2(0, 12)
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_uo2fv")]
+visible = false
+offset = Vector2(475, 280)
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 475, 280)
 
 [node name="Inventory" type="TextureRect" parent="."]
 offset_left = 576.0

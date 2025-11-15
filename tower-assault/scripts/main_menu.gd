@@ -4,7 +4,6 @@ extends Control
 @onready var start_button = $"VBoxContainer/Button (Start Game)"
 
 func _ready():
-	
 	$AnimatedSprite2D.play()
 	start_button.modulate.a = 0
 	start_button.disabled = true
@@ -18,6 +17,5 @@ func _on_button_2_quit_pressed():
 	get_tree().quit()
 
 func _on_scroll_button_animation_animation_finished() -> void:
-
 	start_button.modulate.a = 1
 	start_button.disabled = false
