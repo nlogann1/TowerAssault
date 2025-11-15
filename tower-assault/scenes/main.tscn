@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://clqcu0bijloev" path="res://scenes/archer.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://b0ai7154me5i0" path="res://scenes/archer.tscn" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bd5rmbtjdhobj" path="res://assets/game_background_4.png" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://rvughh3loyib" path="res://scenes/soldier.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://bp6o45xlmi16w" path="res://scenes/ghoul_mob.tscn" id="5_85g3d"]
