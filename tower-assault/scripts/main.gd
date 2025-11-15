@@ -62,17 +62,19 @@ func new_game():
 	currency = 500
 	
 	current_wave = 0 # Reset wave count
+	current_cost = 150 # Reset upgrade cost
+	castle_level = 0 # Reset castle level
 	
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.update_health(health)
 	$HUD.update_currency(currency)
-	$HUD.update_upgrade_cost(base_upgrade_costs[castle_level])
+	$HUD.update_upgrade_cost(base_upgrade_costs[0])
 	$HUD.check_button_costs(currency)
+	$HUD.show_buttons()
+	$HUD.show_message("Get Ready!")
 	$Base.update_visuals(castle_level, health, max_health)
 	$Base.reset()
-	current_cost = base_upgrade_costs[0]
-	$HUD.show_message("Get Ready!")
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("soldiers", "queue_free")
 
@@ -118,6 +120,7 @@ func game_over():
 	$MobTimer.stop()
 	$NextWaveTimer.stop() # Stop the countdown timer
 	$HUD.show_game_over()
+	$HUD.hide_buttons()
 
 # --- Wave Spawning Functions ---
 
@@ -253,3 +256,22 @@ func _on_mob_died(reward):
 		
 		$HUD.start_wave_countdown($NextWaveTimer)
 		$NextWaveTimer.start()
+
+func pause_me():
+	paused = true
+	$NextWaveTimer.paused = true
+	$MobTimer.paused = true # Do we even use this still?
+	$ScoreTimer.paused = true
+	$StartTimer.paused = true
+
+func unpause_me():
+	paused = false
+	$NextWaveTimer.paused = false
+	$MobTimer.paused = false # Do we even use this still?
+	$ScoreTimer.paused = false
+	$StartTimer.paused = false
+	
+func free_gold():
+	currency += 100
+	$HUD.update_currency(currency)
+	$HUD.check_button_costs(currency)

@@ -65,7 +65,6 @@ grow_vertical = 0
 text = "Start"
 
 [node name="BuildTower" type="Button" parent="."]
-anchors_preset = -1
 offset_left = 152.0
 offset_top = 666.0
 offset_right = 212.0
@@ -118,8 +117,27 @@ label_settings = SubResource("LabelSettings_5ysmq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PauseButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 64.0
+grow_horizontal = 0
+text = "Pause"
+
+[node name="FreeGoldButton" type="Button" parent="."]
+offset_left = 1020.0
+offset_top = 67.0
+offset_right = 1080.0
+offset_bottom = 125.0
+text = "Free
+Gold"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildTower" to="." method="_on_build_tower_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
 [connection signal="pressed" from="SpawnSoldierButton" to="." method="_on_spawn_soldier_button_pressed"]
 [connection signal="pressed" from="UpgradeBaseButton" to="." method="_on_upgrade_base_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="FreeGoldButton" to="." method="_on_free_gold_button_pressed"]
