@@ -16,12 +16,13 @@ var countdown_timer = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PauseButton.hide()
-	$BuildArcherButton.hide()
+	$SpawnArcherButton.hide()
 	$FreeGoldButton.hide()
-	$SpawnSoldierButton.hide()
+	$SpawnSoldierIconButton.hide()
 	$UpgradeBaseButton.hide()
 	$UpgradeCostLabel.hide()
 	$WaveCountdownLabel.hide()
+	$Inventory.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -54,11 +55,12 @@ func _on_start_button_pressed():
 	$StartButton.hide()
 	$Message.hide()
 	$PauseButton.show()
-	$BuildArcherButton.show()
-	$SpawnSoldierButton.show()
+	$SpawnArcherButton.show()
+	$SpawnSoldierIconButton.show()
 	$UpgradeBaseButton.show()
 	$UpgradeCostLabel.show()
 	$FreeGoldButton.show()
+	$Inventory.show()
 	paused = false
 	start_game.emit()
 
@@ -67,8 +69,8 @@ func _on_build_tower_pressed() -> void:
 		build_tower.emit()
 
 func cancel_build_tower():
-	$BuildArcherButton.button_pressed = false
-	$BuildArcherButton.release_focus()
+	$SpawnArcherButton.button_pressed = false
+	$SpawnArcherButton.release_focus()
 
 func _on_message_timer_timeout():
 	$Message.hide()
@@ -83,15 +85,15 @@ func update_currency(amount):
 func check_button_costs(current_currency):
 	# --- Check Soldier Button ---
 	if current_currency >= soldier_cost:
-		$SpawnSoldierButton.disabled = false
+		$SpawnSoldierIconButton.disabled = false
 	else:
-		$SpawnSoldierButton.disabled = true
+		$SpawnSoldierIconButton.disabled = true
 		
 	# --- Check Tower Button ---
 	if current_currency >= tower_cost:
-		$BuildArcherButton.disabled = false
+		$SpawnArcherButton.disabled = false
 	else:
-		$BuildArcherButton.disabled = true
+		$SpawnArcherButton.disabled = true
 		
 	if current_currency >= base_upgrade_cost:
 		$UpgradeBaseButton.disabled = false
@@ -145,3 +147,7 @@ func _on_pause_button_pressed():
 
 func _on_free_gold_button_pressed() -> void:
 	get_tree().call_group("main", "free_gold")
+
+
+func _on_build_archer_button_pressed() -> void:
+	pass # Replace with function body.
