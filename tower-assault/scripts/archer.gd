@@ -3,6 +3,7 @@ extends StaticBody2D
 @export var proj_scene: PackedScene
 
 var parent_node
+var paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,3 +29,11 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	parent_node.can_build = true
+	
+func pause_me():
+	paused = true
+	$AttackTimer.paused = true
+
+func unpause_me():
+	paused = false
+	$AttackTimer.paused = false

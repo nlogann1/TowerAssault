@@ -3,6 +3,7 @@ extends Area2D
 signal base_hit
 
 var health = 10 # Let's assume this is the starting health for level 1
+var bumped = false
 
 # --- PRELOAD ALL 9 CASTLE IMAGES ---
 # (Make sure to drag your images from the FileSystem into these slots)
@@ -25,6 +26,7 @@ var health = 10 # Let's assume this is the starting health for level 1
 
 # We'll store them in a 2D array for easy access
 var castle_textures = []
+var bump_amount = [40, 30, 30]
 
 @onready var sprite = $CastleSprite
 
@@ -63,6 +65,12 @@ func update_visuals(level, current_health, max_health):
 	# level = 0, 1, or 2
 	# damage_index = 0, 1, or 2
 	sprite.texture = castle_textures[level][damage_index]
+	if bumped and (damage_index != 2):
+		sprite.position = Vector2(0, 0)
+		bumped = false
+	if not bumped and (damage_index == 2):
+		sprite.position += Vector2(0, bump_amount[level])
+		bumped = true
 
 func reset():
 	health = 10

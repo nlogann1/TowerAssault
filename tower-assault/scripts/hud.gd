@@ -4,6 +4,7 @@ signal start_game
 signal build_tower
 signal spawn_soldier
 signal upgrade_base
+signal pause_alert
 
 var soldier_cost = 25
 var tower_cost = 50
@@ -14,7 +15,12 @@ var countdown_timer = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$PauseButton.hide()
 	$BuildTower.hide()
+	$FreeGoldButton.hide()
+	$SpawnSoldierButton.hide()
+	$UpgradeBaseButton.hide()
+	$UpgradeCostLabel.hide()
 	$WaveCountdownLabel.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,7 +52,12 @@ func update_health(health):
 func _on_start_button_pressed():
 	$StartButton.hide()
 	$Message.hide()
+	$PauseButton.show()
 	$BuildTower.show()
+	$SpawnSoldierButton.show()
+	$UpgradeBaseButton.show()
+	$UpgradeCostLabel.show()
+	$FreeGoldButton.show()
 	paused = false
 	start_game.emit()
 
@@ -110,3 +121,26 @@ func _on_upgrade_base_button_pressed() -> void:
 
 func pause(state):
 	paused = state
+
+func hide_buttons():
+	$PauseButton.hide()
+	
+func show_buttons():
+	$PauseButton.show()
+
+func _on_pause_button_pressed():
+	if paused:
+		paused = false
+		$PauseButton.text = "Pause"
+		get_tree().call_group("enemies", "unpause_me")
+		get_tree().call_group("main", "unpause_me")
+		get_tree().call_group("soldiers", "unpause_me")
+	else:
+		paused = true
+		$PauseButton.text = "Play"
+		get_tree().call_group("enemies", "pause_me")
+		get_tree().call_group("main", "pause_me")
+		get_tree().call_group("soldiers", "pause_me")
+
+func _on_free_gold_button_pressed() -> void:
+	get_tree().call_group("main", "free_gold")

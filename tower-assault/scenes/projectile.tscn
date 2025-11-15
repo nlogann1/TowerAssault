@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxf0c"]
 radius = 500.39978
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" groups=["soldiers"]]
 scale = Vector2(0.05, 0.05)
 script = ExtResource("1_q3m7n")
 
