@@ -67,7 +67,7 @@ func new_game():
 	
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.update_health(health)
+	$HUD.update_health(health, max_health)
 	$HUD.update_currency(currency)
 	$HUD.update_upgrade_cost(base_upgrade_costs[0])
 	$HUD.check_button_costs(currency)
@@ -97,7 +97,7 @@ func _on_hud_upgrade_base_pressed():
 		
 		# Update the HUD
 		$HUD.update_currency(currency)
-		$HUD.update_health(health)
+		$HUD.update_health(health, max_health)
 		$HUD.update_upgrade_cost(next_cost)
 		$HUD.check_button_costs(currency)
 		
@@ -107,7 +107,7 @@ func _on_hud_upgrade_base_pressed():
 func _on_base_base_hit():
 	if not paused:
 		health -= 1
-		$HUD.update_health(health)
+		$HUD.update_health(health, max_health)
 		# Update the sprite to show the new damage
 		$Base.update_visuals(castle_level, health, max_health)
 		if health <= 0:

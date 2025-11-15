@@ -46,8 +46,9 @@ func show_game_over():
 func update_score(score):
 	$ScoreLabel.text = ("Score: " + str(score))
 
-func update_health(health):
-	$HealthLabel.text = ("Health: " + str(health))
+func update_health(current_health, max_health):
+	$BaseHealthBar.max_value = max_health
+	$BaseHealthBar.value = current_health
 
 func _on_start_button_pressed():
 	$StartButton.hide()

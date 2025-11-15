@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=9 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
 [ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://dqd5ggxhxjs8k" path="res://assets/Pixel1_Healthbar_0002_pixel1_border.png" id="3_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://dh7yddvg6mlie" path="res://assets/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="4_uo2fv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font_color = Color(0, 0, 0, 1)
@@ -28,14 +30,6 @@ offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_oo0fn")
-
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = 92.0
-offset_top = 1.0
-offset_right = 158.0
-offset_bottom = 24.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Health: 10"
 
 [node name="Message" type="Label" parent="."]
 anchors_preset = 8
@@ -133,6 +127,17 @@ offset_right = 1080.0
 offset_bottom = 125.0
 text = "Free
 Gold"
+
+[node name="BaseHealthBar" type="TextureProgressBar" parent="."]
+offset_left = 408.0
+offset_top = -173.0
+offset_right = 546.0
+offset_bottom = -75.0
+scale = Vector2(3, 3)
+value = 100.0
+texture_under = ExtResource("3_6fi6k")
+texture_progress = ExtResource("4_uo2fv")
+texture_progress_offset = Vector2(0, 12)
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="BuildArcherButton" to="." method="_on_build_tower_pressed"]
