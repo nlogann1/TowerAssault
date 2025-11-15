@@ -16,7 +16,7 @@ var countdown_timer = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PauseButton.hide()
-	$BuildTower.hide()
+	$BuildArcherButton.hide()
 	$FreeGoldButton.hide()
 	$SpawnSoldierButton.hide()
 	$UpgradeBaseButton.hide()
@@ -53,7 +53,7 @@ func _on_start_button_pressed():
 	$StartButton.hide()
 	$Message.hide()
 	$PauseButton.show()
-	$BuildTower.show()
+	$BuildArcherButton.show()
 	$SpawnSoldierButton.show()
 	$UpgradeBaseButton.show()
 	$UpgradeCostLabel.show()
@@ -66,8 +66,8 @@ func _on_build_tower_pressed() -> void:
 		build_tower.emit()
 
 func cancel_build_tower():
-	$BuildTower.button_pressed = false
-	$BuildTower.release_focus()
+	$BuildArcherButton.button_pressed = false
+	$BuildArcherButton.release_focus()
 
 func _on_message_timer_timeout():
 	$Message.hide()
@@ -88,9 +88,9 @@ func check_button_costs(current_currency):
 		
 	# --- Check Tower Button ---
 	if current_currency >= tower_cost:
-		$BuildTower.disabled = false
+		$BuildArcherButton.disabled = false
 	else:
-		$BuildTower.disabled = true
+		$BuildArcherButton.disabled = true
 		
 	if current_currency >= base_upgrade_cost:
 		$UpgradeBaseButton.disabled = false

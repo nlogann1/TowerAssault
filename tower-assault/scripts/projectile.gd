@@ -1,29 +1,19 @@
 extends Area2D
 
 var speed = 400
-var damage = 5
-var passthrough = false
-var paused = false
+var damage = 25
+var direction = Vector2.RIGHT # This will be set by the archer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _process(delta: float):
+	# Move in the set direction
+	global_position += direction * speed * delta
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if not paused:
-		position.x += speed * delta
+# This is the function your tower_range script is looking for
+func aim_at(target_pos):
+	direction = (global_position.direction_to(target_pos))
+	rotation = direction.angle() # This makes the sprite face the target
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Node2D):
 	if body.is_in_group("enemies"):
 		body.damage_taken(damage)
-		if passthrough == false:
-			queue_free()
-		else:
-			passthrough = false
-
-func pause_me():
-	paused = true
-
-func unpause_me():
-	paused = false
+		queue_free() # Destroy the projectile on hit
