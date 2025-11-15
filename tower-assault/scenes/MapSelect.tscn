@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://87847hesl48n"]
 
-[ext_resource type="Script" uid="uid://bmvqsu5f0oyke" path="res://map_select.gd" id="1_7yywt"]
+[ext_resource type="Script" uid="uid://bmvqsu5f0oyke" path="res://scripts/map_select.gd" id="1_7yywt"]
 
 [node name="MapSelect" type="Control"]
 layout_mode = 3

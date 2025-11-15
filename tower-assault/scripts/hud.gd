@@ -133,6 +133,7 @@ func pause(state):
 		$PauseMenu.hide()
 		paused = false
 		$PauseButton.text = "Pause"
+		$PauseMenu.unpause()
 		get_tree().call_group("enemies", "unpause_me")
 		get_tree().call_group("main", "unpause_me")
 		get_tree().call_group("soldiers", "unpause_me")

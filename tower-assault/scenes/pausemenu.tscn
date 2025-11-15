@@ -77,8 +77,68 @@ position = Vector2(23.00003, 8)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_klbn3")
 
+[node name="Map1Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 114.0
+offset_right = 244.0
+offset_bottom = 145.0
+scale = Vector2(0.75, 0.75)
+text = "Field Map"
+
+[node name="Map2Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 140.0
+offset_right = 244.0
+offset_bottom = 171.0
+scale = Vector2(0.75, 0.75)
+text = "Grave Yard"
+
+[node name="Map3Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 166.0
+offset_right = 244.0
+offset_bottom = 197.0
+scale = Vector2(0.75, 0.75)
+text = "Dead Forest"
+
+[node name="Map4Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 192.0
+offset_right = 244.0
+offset_bottom = 223.0
+scale = Vector2(0.75, 0.75)
+text = "Dusty Desert"
+
+[node name="Map5Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 218.0
+offset_right = 244.0
+offset_bottom = 249.0
+scale = Vector2(0.75, 0.75)
+text = "Dark Castle"
+
+[node name="Map6Button" type="Button" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = 244.0
+offset_right = 244.0
+offset_bottom = 275.0
+scale = Vector2(0.75, 0.75)
+text = "Throne"
+
 [connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="LevelsButton" to="." method="_on_levels_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Map1Button" to="." method="_on_map_1_button_pressed"]
+[connection signal="pressed" from="Map2Button" to="." method="_on_map_2_button_pressed"]
+[connection signal="pressed" from="Map3Button" to="." method="_on_map_3_button_pressed"]
+[connection signal="pressed" from="Map4Button" to="." method="_on_map_4_button_pressed"]
+[connection signal="pressed" from="Map5Button" to="." method="_on_map_5_button_pressed"]
+[connection signal="pressed" from="Map6Button" to="." method="_on_map_6_button_pressed"]

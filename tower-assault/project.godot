@@ -27,6 +27,7 @@ enemies=""
 soldiers=""
 base=""
 main=""
+HUD=""
 
 [input]
 

@@ -5,11 +5,20 @@ extends Node
 @export var soldier_scene: PackedScene
 @export var ghoul_mob_scene: PackedScene
 
+@onready var map1 = preload("res://assets/maps/game_background_4.png")
+@onready var map2 = preload("res://assets/maps/terrace.png")
+@onready var map3 = preload("res://assets/maps/dead forest.png")
+@onready var map4 = preload("res://assets/maps/game_background_1.png")
+@onready var map5 = preload("res://assets/maps/castle.png")
+@onready var map6 = preload("res://assets/maps/throne room.png")
+@onready var maps = [map1, map2, map3, map4, map5, map6]
+
 var score
 var health
 var build_tower_display
 var max_health = 10
 var paused = false
+var first_game = true
 
 var currency = 0
 var soldier_cost = 25
@@ -60,6 +69,10 @@ func _process(delta: float):
 				$HUD.pause(true)
 
 func new_game():
+	if not first_game:
+		$ScoreTimer.stop()
+		$MobTimer.stop()
+		$NextWaveTimer.stop()
 	score = 0
 	max_health = 10
 	health = max_health
@@ -68,6 +81,7 @@ func new_game():
 	currency = 500
 	
 	current_wave = 0 # Reset wave count
+	mobs_spawned_in_wave = 0
 	current_cost = 150 # Reset upgrade cost
 	castle_level = 0 # Reset castle level
 	
@@ -83,6 +97,8 @@ func new_game():
 	$Base.reset()
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("soldiers", "queue_free")
+	
+	first_game = false
 
 func _on_hud_upgrade_base_pressed():
 	current_cost = base_upgrade_costs[castle_level]
@@ -284,3 +300,6 @@ func free_gold():
 	currency += 100
 	$HUD.update_currency(currency)
 	$HUD.check_button_costs(currency)
+
+func change_map(choice):
+	$Background.texture = maps[choice]
