@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=16 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
 [ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_oo0fn"]
@@ -30,12 +30,15 @@ region = Rect2(11.069767, 42.878548, 170.14885, 21.348267)
 atlas = ExtResource("6_5pdws")
 region = Rect2(127.38582, 0.21988773, 32.993027, 31.599747)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pdws"]
+atlas = ExtResource("6_5pdws")
+region = Rect2(63.79028, 2335.8838, 30.685719, 30.468262)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_047uy"]
 atlas = ExtResource("6_5pdws")
 region = Rect2(352.03113, 3168.7866, 33.93628, 29.519531)
 
 [node name="HUD" type="CanvasLayer" groups=["HUD"]]
-
 script = ExtResource("1_ahhtf")
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -169,6 +172,15 @@ offset_bottom = 703.0
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_0i1j5")
 
+[node name="SpawnCatapultIconButton" type="TextureButton" parent="."]
+offset_left = 691.0
+offset_top = 669.0
+offset_right = 727.0
+offset_bottom = 702.0
+scale = Vector2(1.15, 1.15)
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_5pdws")
+
 [node name="SpawnArcherButton" type="TextureButton" parent="."]
 offset_left = 645.0
 offset_top = 673.0
@@ -184,4 +196,5 @@ texture_normal = SubResource("AtlasTexture_047uy")
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="FreeGoldButton" to="." method="_on_free_gold_button_pressed"]
 [connection signal="pressed" from="SpawnSoldierIconButton" to="." method="_on_spawn_soldier_button_pressed"]
+[connection signal="pressed" from="SpawnCatapultIconButton" to="." method="_on_spawn_catapult_icon_button_pressed"]
 [connection signal="pressed" from="SpawnArcherButton" to="." method="_on_build_tower_pressed"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgi6a20ncvv5"]
+
+[ext_resource type="Script" uid="uid://dd5d4s3yycr5q" path="res://scripts/projectile.gd" id="1_vr48l"]
+[ext_resource type="Texture2D" uid="uid://c047oynh6ffaj" path="res://assets/Catapulta_piedra(1).png" id="2_vr48l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpath"]
+atlas = ExtResource("2_vr48l")
+region = Rect2(0, 0, 25, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b43m"]
+atlas = ExtResource("2_vr48l")
+region = Rect2(0, 15, 25, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1fv70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpath")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b43m")
+}],
+"loop": true,
+"name": &"rock",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxf0c"]
+radius = 500.39978
+
+[node name="Projectile" type="Area2D" groups=["soldiers"]]
+scale = Vector2(0.05, 0.05)
+script = ExtResource("1_vr48l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(357.71756, 274.17105)
+scale = Vector2(24.182592, 35.443863)
+sprite_frames = SubResource("SpriteFrames_1fv70")
+animation = &"rock"
+frame_progress = 0.30425173
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(6.1035156e-05, 0.00012207031)
+shape = SubResource("CircleShape2D_qxf0c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
