@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ich82qkpf18n"]
+[gd_scene load_steps=14 format=3 uid="uid://ich82qkpf18n"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_5w0ad"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_kocsa"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_6li7e"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_tcq6v"]
 [ext_resource type="PackedScene" uid="uid://c8bh7kauonjfg" path="res://scenes/toxic_hound.tscn" id="8_v41ee"]
+[ext_resource type="PackedScene" uid="uid://dyf4oivq15684" path="res://scenes/boss2.tscn" id="9_tltda"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(450, 368)
@@ -24,6 +25,7 @@ ghoul_mob_scene = ExtResource("5_tltda")
 catapult_scene = ExtResource("6_kocsa")
 boss_scene = ExtResource("7_0a3ge")
 toxic_hound_scene = ExtResource("8_v41ee")
+boss2_scene = ExtResource("9_tltda")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
