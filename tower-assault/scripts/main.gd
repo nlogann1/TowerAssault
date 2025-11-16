@@ -6,6 +6,7 @@ extends Node
 @export var ghoul_mob_scene: PackedScene
 @export var catapult_scene: PackedScene
 @export var boss_scene: PackedScene
+@export var toxic_hound_scene : PackedScene
 
 # --- UNIT COSTS ---
 @export var soldier_cost = 25
@@ -44,7 +45,9 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
+	{ "mob_type": "hound", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
+	{ "mob_type": "toxic_hound", "mob_count": 15, "mob_delay": 0.8 },
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
@@ -231,6 +234,9 @@ func _on_mob_timer_timeout():
 	var mob_to_spawn = mob_scene
 	if wave.mob_type == "ghoul":
 		mob_to_spawn = ghoul_mob_scene
+		
+	elif wave.mob_type == "hound":
+		mob_to_spawn = toxic_hound_scene
 		
 	elif wave.mob_type == "boss":
 		mob_to_spawn = boss_scene
