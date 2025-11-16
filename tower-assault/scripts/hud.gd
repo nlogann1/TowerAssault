@@ -74,8 +74,10 @@ func _on_build_tower_pressed() -> void:
 func cancel_build_tower():
 	$SpawnArcherButton.button_pressed = false
 	$SpawnArcherButton.release_focus()
-	$SpawnCatapultButton.button_pressed = false
-	$SpawnCatapultButton.release_focus() 
+
+func cancel_build_catapult():
+	$SpawnCatapultIconButton.button_pressed = false
+	$SpawnCatapultIconButton.release_focus()
 
 func _on_message_timer_timeout():
 	$Message.hide()
