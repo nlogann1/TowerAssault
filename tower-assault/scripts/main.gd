@@ -226,34 +226,45 @@ func start_next_wave():
 	current_wave += 1
 
 func _on_mob_timer_timeout():
+	# 1. Get wave data and check if we're done
 	var wave = wave_data[current_wave - 1]
 	if mobs_spawned_in_wave >= wave.mob_count:
 		$MobTimer.stop()
 		return
 	
+	# 2. Increment counter
 	mobs_spawned_in_wave += 1
-	var mob_to_spawn = mob_scene
+	
+	# 3. Figure out which scene to spawn
+	var mob_to_spawn = mob_scene # Default
 	if wave.mob_type == "ghoul":
 		mob_to_spawn = ghoul_mob_scene
-		
 	elif wave.mob_type == "toxic_hound":
 		mob_to_spawn = toxic_hound_scene
-		
 	elif wave.mob_type == "boss":
 		mob_to_spawn = boss_scene
-		
-	elif wave.mob_type == "boss2": 
+	elif wave.mob_type == "boss2":
 		mob_to_spawn = boss2_scene
 	
-	var mob = mob_to_spawn.instantiate()
-	var spawn_points = $SpawnPoints.get_children()
-	var random_spawn_point = spawn_points.pick_random()
-	mob.global_position = random_spawn_point.global_position
-	mob.target_position = $Base.global_position
+	# 4. NOW we create the mob
+	var mob = mob_to_spawn.instantiate() 
 	
+	# 5. Figure out where to spawn it
+	if wave.mob_type == "boss" or wave.mob_type == "boss2":
+		# It's a boss, spawn it at the special point
+		mob.global_position = $BossSpawnPoint.global_position
+	else:
+		# It's a regular mob, use the random spawner
+		var spawn_points = $SpawnPoints.get_children()
+		var random_spawn_point = spawn_points.pick_random()
+		mob.global_position = random_spawn_point.global_position
+	
+	# 6. Set target positions
+	mob.target_position = $Base.global_position
 	var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(30.0, mob_attack_slot_radius)
 	mob.target_attack_position = $Base.global_position + offset
 
+	# 7. Add to scene and connect
 	add_child(mob)
 	mob.died.connect(_on_mob_died)
 
