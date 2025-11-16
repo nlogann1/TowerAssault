@@ -1,0 +1,129 @@
+[gd_scene load_steps=19 format=3 uid="uid://mhf8837bjeqm"]
+
+[ext_resource type="Script" uid="uid://x8q45s2ab0w5" path="res://scripts/catapult.gd" id="1_pa6a7"]
+[ext_resource type="Texture2D" uid="uid://bas4k3h7galx2" path="res://assets/Catapulta_animacion1-ezgif.com-rotate.png" id="2_pa6a7"]
+[ext_resource type="Script" uid="uid://rytp1q6snrda" path="res://scripts/catapult_range.gd" id="3_8s2d5"]
+[ext_resource type="PackedScene" uid="uid://cgi6a20ncvv5" path="res://scenes/catapult_rock.tscn" id="4_pa6a7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bn6qc"]
+radius = 14.56022
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtymq"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(10240, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qrlm"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(9216, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0k36n"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(8192, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmluf"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(7168, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lijvw"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(6144, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itavx"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(5120, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb6lw"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(4096, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i65l5"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(3072, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk6dx"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(2048, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4041"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(1024, 0, 1024, 1024)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auu61"]
+atlas = ExtResource("2_pa6a7")
+region = Rect2(0, 0, 1024, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_811sq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtymq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qrlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k36n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmluf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lijvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itavx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb6lw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i65l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk6dx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4041")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auu61")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2x682"]
+radius = 779.4338
+
+[node name="catapult" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_pa6a7")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_bn6qc")
+
+[node name="CatapultSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2109375, 0.1953125)
+sprite_frames = SubResource("SpriteFrames_811sq")
+animation = &"attack"
+frame = 3
+speed_scale = 2.4
+
+[node name="tower_range" type="Area2D" parent="."]
+script = ExtResource("3_8s2d5")
+projectile_scene = ExtResource("4_pa6a7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tower_range"]
+visible = false
+shape = SubResource("CircleShape2D_2x682")
+
+[node name="AttackTimer" type="Timer" parent="tower_range"]
+wait_time = 4.300000000000001
+one_shot = true
+
+[connection signal="body_entered" from="tower_range" to="tower_range" method="_on_body_entered"]
+[connection signal="body_exited" from="tower_range" to="tower_range" method="_on_body_exited"]
+[connection signal="timeout" from="tower_range/AttackTimer" to="tower_range" method="_on_attack_timer_timeout"]

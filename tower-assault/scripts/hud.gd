@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 signal start_game
-signal build_tower
 signal spawn_soldier
 signal upgrade_base
-signal pause_alert
+signal build_archer
+signal build_catapult
 
 var soldier_cost = 25
 var tower_cost = 50
@@ -19,6 +19,7 @@ func _ready() -> void:
 	$SpawnArcherButton.hide()
 	$FreeGoldButton.hide()
 	$SpawnSoldierIconButton.hide()
+	$SpawnCatapultIconButton.hide()
 	$UpgradeBaseButton.hide()
 	$UpgradeCostLabel.hide()
 	$WaveCountdownLabel.hide()
@@ -61,16 +62,20 @@ func _on_start_button_pressed():
 	$UpgradeCostLabel.show()
 	$FreeGoldButton.show()
 	$Inventory.show()
+	$SpawnSoldierIconButton.show()
+	$SpawnCatapultIconButton.show()
 	paused = false
 	start_game.emit()
 
 func _on_build_tower_pressed() -> void:
 	if not paused:
-		build_tower.emit()
+		build_archer.emit()
 
 func cancel_build_tower():
 	$SpawnArcherButton.button_pressed = false
 	$SpawnArcherButton.release_focus()
+	$SpawnCatapultButton.button_pressed = false
+	$SpawnCatapultButton.release_focus() 
 
 func _on_message_timer_timeout():
 	$Message.hide()
@@ -158,3 +163,7 @@ func _on_free_gold_button_pressed() -> void:
 
 func _on_build_archer_button_pressed() -> void:
 	pass # Replace with function body.
+
+func _on_spawn_catapult_icon_button_pressed() -> void:
+	if not paused:
+		build_catapult.emit()

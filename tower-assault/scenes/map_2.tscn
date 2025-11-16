@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ich82qkpf18n"]
+[gd_scene load_steps=11 format=3 uid="uid://ich82qkpf18n"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_5w0ad"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_kocsa"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rvughh3loyib" path="res://scenes/soldier.tscn" id="4_v41ee"]
 [ext_resource type="PackedScene" uid="uid://bp6o45xlmi16w" path="res://scenes/ghoul_mob.tscn" id="5_tltda"]
 [ext_resource type="Texture2D" uid="uid://dssh8o02ss7h5" path="res://assets/maps/castle.png" id="6_5w0ad"]
+[ext_resource type="PackedScene" uid="uid://mhf8837bjeqm" path="res://scenes/catapult.tscn" id="6_kocsa"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_6li7e"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_tcq6v"]
 
@@ -18,6 +19,7 @@ mob_scene = ExtResource("2_kocsa")
 tower_scene = ExtResource("3_0a3ge")
 soldier_scene = ExtResource("4_v41ee")
 ghoul_mob_scene = ExtResource("5_tltda")
+catapult_scene = ExtResource("6_kocsa")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -68,7 +70,6 @@ one_shot = true
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="build_tower" from="HUD" to="." method="tower_button_pressed"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="mouse_entered" from="BuildZone" to="." method="_on_build_zone_mouse_entered"]
 [connection signal="mouse_exited" from="BuildZone" to="." method="_on_build_zone_mouse_exited"]
