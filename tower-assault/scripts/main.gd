@@ -5,6 +5,7 @@ extends Node
 @export var soldier_scene: PackedScene
 @export var ghoul_mob_scene: PackedScene
 @export var catapult_scene: PackedScene
+@export var boss_scene: PackedScene
 
 # --- UNIT COSTS ---
 @export var soldier_cost = 25
@@ -42,11 +43,13 @@ var castle_level = 0
 var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
-var wave_data = [
+var wave_data = [ 
+	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
+	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "ghoul", "mob_count": 3, "mob_delay": 3.0 },
-	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 }
+	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 },
 ]
 
 func _ready() -> void:
@@ -228,6 +231,9 @@ func _on_mob_timer_timeout():
 	var mob_to_spawn = mob_scene
 	if wave.mob_type == "ghoul":
 		mob_to_spawn = ghoul_mob_scene
+		
+	elif wave.mob_type == "boss":
+		mob_to_spawn = boss_scene
 	
 	var mob = mob_to_spawn.instantiate()
 	var spawn_points = $SpawnPoints.get_children()

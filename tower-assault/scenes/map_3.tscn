@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmd7ydpd5hbte"]
+[gd_scene load_steps=12 format=3 uid="uid://cmd7ydpd5hbte"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_0a7yh"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_fwffn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bf3uw7sprtdh6" path="res://assets/maps/dead forest.png" id="6_0a7yh"]
 [ext_resource type="PackedScene" uid="uid://mhf8837bjeqm" path="res://scenes/catapult.tscn" id="6_fwffn"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_0jfrf"]
+[ext_resource type="PackedScene" uid="uid://ra0wrn1lxlwe" path="res://scenes/boss.tscn" id="7_iqnx3"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_briq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
@@ -20,6 +21,7 @@ tower_scene = ExtResource("3_iqnx3")
 soldier_scene = ExtResource("4_xn387")
 ghoul_mob_scene = ExtResource("5_an2rc")
 catapult_scene = ExtResource("6_fwffn")
+boss_scene = ExtResource("7_iqnx3")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]

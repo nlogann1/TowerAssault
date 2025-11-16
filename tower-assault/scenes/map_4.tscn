@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx8v55keanvie"]
+[gd_scene load_steps=12 format=3 uid="uid://cx8v55keanvie"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_mpexw"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_08pjf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://mhf8837bjeqm" path="res://scenes/catapult.tscn" id="6_08pjf"]
 [ext_resource type="Texture2D" uid="uid://sjgprrt6d1qj" path="res://assets/maps/game_background_1.png" id="6_mpexw"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_0i8bn"]
+[ext_resource type="PackedScene" uid="uid://ra0wrn1lxlwe" path="res://scenes/boss.tscn" id="7_4cmb7"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_6p068"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
@@ -20,6 +21,7 @@ tower_scene = ExtResource("3_4cmb7")
 soldier_scene = ExtResource("4_imjx3")
 ghoul_mob_scene = ExtResource("5_nasj0")
 catapult_scene = ExtResource("6_08pjf")
+boss_scene = ExtResource("7_4cmb7")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]

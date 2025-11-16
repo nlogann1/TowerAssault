@@ -49,7 +49,7 @@ func _on_body_exited(body:Node2D) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
-	anim_sprite.play("idle")
+	anim_sprite.play("walk")
 
 func pause_me():
 	paused = true
