@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cgi6a20ncvv5"]
 
-[ext_resource type="Script" uid="uid://dd5d4s3yycr5q" path="res://scripts/projectile.gd" id="1_vr48l"]
+[ext_resource type="Script" uid="uid://s0khluumuvsv" path="res://scripts/catapult_rock.gd" id="1_vr48l"]
 [ext_resource type="Texture2D" uid="uid://c047oynh6ffaj" path="res://assets/Catapulta_piedra(1).png" id="2_vr48l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpath"]
