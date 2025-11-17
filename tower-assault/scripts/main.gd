@@ -9,6 +9,7 @@ extends Node
 @export var toxic_hound_scene : PackedScene
 @export var boss2_scene: PackedScene
 @export var spawner_scene: PackedScene
+@export var fire_boss_scene: PackedScene
 
 # --- UNIT COSTS ---
 @export var soldier_cost = 25
@@ -47,6 +48,7 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
+	{ "mob_type": "fire_boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "toxic_hound", "mob_count": 8, "mob_delay": 0.8 },
@@ -54,7 +56,6 @@ var wave_data = [
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
-	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 },
 ]
 
 func _ready() -> void:
@@ -161,8 +162,6 @@ func build_unit(unit_type, position):
 		$HUD.cancel_build_catapult() # Deselect the button
 
 
-# --- OLD FUNCTIONS ARE NOW SIMPLER ---
-
 # This function is now just for soldiers
 func _on_hud_spawn_soldier():
 	var spawn_pos = $Base.global_position + Vector2(200, soldier_spawn_offset)
@@ -175,8 +174,6 @@ func _on_hud_build_archer():
 func _on_hud_build_catapult():
 	unit_to_build_type = "catapult"
 
-# --- ALL OTHER FUNCTIONS BELOW ARE UNCHANGED ---
-# (Your original code for game_over, _on_base_base_hit, _on_hud_upgrade_base_pressed, etc.)
 
 func _on_hud_upgrade_base_pressed():
 	current_cost = base_upgrade_costs[castle_level]
@@ -246,8 +243,10 @@ func _on_mob_timer_timeout():
 		mob_to_spawn = boss_scene
 	elif wave.mob_type == "boss2":
 		mob_to_spawn = boss2_scene
-	elif wave.mob_type == "spawner": # <--- ADD THIS
+	elif wave.mob_type == "spawner": 
 		mob_to_spawn = spawner_scene
+	elif wave.mob_type == "fire_boss": 
+		mob_to_spawn = fire_boss_scene
 	
 	# 4. NOW we create the mob
 	var mob = mob_to_spawn.instantiate() 
