@@ -8,6 +8,7 @@ extends Node
 @export var boss_scene: PackedScene
 @export var toxic_hound_scene : PackedScene
 @export var boss2_scene: PackedScene
+@export var spawner_scene: PackedScene
 
 # --- UNIT COSTS ---
 @export var soldier_cost = 25
@@ -46,9 +47,10 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
-	{ "mob_type": "boss2", "mob_count": 1, "mob_delay": 2.0 },
+	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "toxic_hound", "mob_count": 8, "mob_delay": 0.8 },
+	{ "mob_type": "boss2", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
@@ -245,12 +247,14 @@ func _on_mob_timer_timeout():
 		mob_to_spawn = boss_scene
 	elif wave.mob_type == "boss2":
 		mob_to_spawn = boss2_scene
+	elif wave.mob_type == "spawner": # <--- ADD THIS
+		mob_to_spawn = spawner_scene
 	
 	# 4. NOW we create the mob
 	var mob = mob_to_spawn.instantiate() 
 	
 	# 5. Figure out where to spawn it
-	if wave.mob_type == "boss" or wave.mob_type == "boss2":
+	if wave.mob_type == "boss" or wave.mob_type == "boss2" or wave.mob_type == "spawner":
 		# It's a boss, spawn it at the special point
 		mob.global_position = $BossSpawnPoint.global_position
 	else:

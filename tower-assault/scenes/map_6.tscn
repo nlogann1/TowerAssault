@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bw1yilew0wd3c"]
+[gd_scene load_steps=15 format=3 uid="uid://bw1yilew0wd3c"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_o0bkn"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_ai184"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_u70qx"]
 [ext_resource type="PackedScene" uid="uid://c8bh7kauonjfg" path="res://scenes/toxic_hound.tscn" id="8_w8t5o"]
 [ext_resource type="PackedScene" uid="uid://dyf4oivq15684" path="res://scenes/boss2.tscn" id="9_4tvjf"]
+[ext_resource type="PackedScene" uid="uid://bebaxk18ffgx0" path="res://scenes/spawner.tscn" id="10_p1n3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(450, 368)
@@ -26,6 +27,7 @@ catapult_scene = ExtResource("6_ai184")
 boss_scene = ExtResource("7_7g08o")
 toxic_hound_scene = ExtResource("8_w8t5o")
 boss2_scene = ExtResource("9_4tvjf")
+spawner_scene = ExtResource("10_p1n3m")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
