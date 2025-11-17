@@ -1,17 +1,20 @@
 extends Control
-
+@onready var background_anim = $AnimatedSprite2D
 func _ready():
-	$VBoxContainer/Map1Button.pressed.connect(_on_map_1_button_pressed)
-	$VBoxContainer/Map2Button.pressed.connect(_on_map_2_button_pressed)
-	$VBoxContainer/Map3Button.pressed.connect(_on_map_3_button_pressed)
-	$VBoxContainer/Map4Button.pressed.connect(_on_map_4_button_pressed)
-	$VBoxContainer/Map5Button.pressed.connect(_on_map_5_button_pressed)
-	$VBoxContainer/Map6Button.pressed.connect(_on_map_6_button_pressed)
-	$BackButton.pressed.connect(_on_back_button_pressed)
+	# Connect all the button signals to their functions
+	$MarginContainer/VBoxContainer/GridContainer/Map1/Map1Button.pressed.connect(_on_map_1_button_pressed)
+	$MarginContainer/VBoxContainer/GridContainer/Map2/Map2Button.pressed.connect(_on_map_2_button_pressed)
+	$MarginContainer/VBoxContainer/GridContainer/Map3/Map3Button.pressed.connect(_on_map_3_button_pressed)
+	$MarginContainer/VBoxContainer/GridContainer/Map4/Map4Button.pressed.connect(_on_map_4_button_pressed)
+	$MarginContainer/VBoxContainer/GridContainer/Map5/Map5Button.pressed.connect(_on_map_5_button_pressed)
+	$MarginContainer/VBoxContainer/GridContainer/Map6/Map6Button.pressed.connect(_on_map_6_button_pressed)
+	$MarginContainer/VBoxContainer/BackButton.pressed.connect(_on_back_button_pressed)
+	background_anim.play("background")
 
 func _on_map_1_button_pressed():
-	# This loads your original map
+	# This loads your original map (main.tscn)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	# print("Loading Map 1") # We don't need this line anymore
 
 func _on_map_2_button_pressed():
 	# This loads your new map
