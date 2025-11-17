@@ -6,6 +6,10 @@ extends Node
 @export var ghoul_mob_scene: PackedScene
 @export var catapult_scene: PackedScene
 @export var boss_scene: PackedScene
+@export var toxic_hound_scene : PackedScene
+@export var boss2_scene: PackedScene
+@export var spawner_scene: PackedScene
+@export var fire_boss_scene: PackedScene
 
 # --- UNIT COSTS ---
 @export var soldier_cost = 25
@@ -44,12 +48,14 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
+	{ "mob_type": "fire_boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
+	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
+	{ "mob_type": "toxic_hound", "mob_count": 8, "mob_delay": 0.8 },
+	{ "mob_type": "boss2", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
-	{ "mob_type": "ghoul", "mob_count": 3, "mob_delay": 3.0 },
-	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 },
 ]
 
 func _ready() -> void:
@@ -156,8 +162,6 @@ func build_unit(unit_type, position):
 		$HUD.cancel_build_catapult() # Deselect the button
 
 
-# --- OLD FUNCTIONS ARE NOW SIMPLER ---
-
 # This function is now just for soldiers
 func _on_hud_spawn_soldier():
 	var spawn_pos = $Base.global_position + Vector2(200, soldier_spawn_offset)
@@ -170,8 +174,6 @@ func _on_hud_build_archer():
 func _on_hud_build_catapult():
 	unit_to_build_type = "catapult"
 
-# --- ALL OTHER FUNCTIONS BELOW ARE UNCHANGED ---
-# (Your original code for game_over, _on_base_base_hit, _on_hud_upgrade_base_pressed, etc.)
 
 func _on_hud_upgrade_base_pressed():
 	current_cost = base_upgrade_costs[castle_level]
@@ -222,28 +224,49 @@ func start_next_wave():
 	current_wave += 1
 
 func _on_mob_timer_timeout():
+	# 1. Get wave data and check if we're done
 	var wave = wave_data[current_wave - 1]
 	if mobs_spawned_in_wave >= wave.mob_count:
 		$MobTimer.stop()
 		return
 	
+	# 2. Increment counter
 	mobs_spawned_in_wave += 1
-	var mob_to_spawn = mob_scene
+	
+	# 3. Figure out which scene to spawn
+	var mob_to_spawn = mob_scene # Default
 	if wave.mob_type == "ghoul":
 		mob_to_spawn = ghoul_mob_scene
-		
+	elif wave.mob_type == "toxic_hound":
+		mob_to_spawn = toxic_hound_scene
 	elif wave.mob_type == "boss":
 		mob_to_spawn = boss_scene
+	elif wave.mob_type == "boss2":
+		mob_to_spawn = boss2_scene
+	elif wave.mob_type == "spawner": 
+		mob_to_spawn = spawner_scene
+	elif wave.mob_type == "fire_boss": 
+		mob_to_spawn = fire_boss_scene
 	
-	var mob = mob_to_spawn.instantiate()
-	var spawn_points = $SpawnPoints.get_children()
-	var random_spawn_point = spawn_points.pick_random()
-	mob.global_position = random_spawn_point.global_position
+	# 4. NOW we create the mob
+	var mob = mob_to_spawn.instantiate() 
+	
+	# 5. Figure out where to spawn it
+	if wave.mob_type == "boss" or wave.mob_type == "boss2" or wave.mob_type == "spawner":
+		# It's a boss, spawn it at the special point
+		mob.global_position = $BossSpawnPoint.global_position
+	else:
+		# It's a regular mob, use the random spawner
+		var spawn_points = $SpawnPoints.get_children()
+		var random_spawn_point = spawn_points.pick_random()
+		mob.global_position = random_spawn_point.global_position
+	
+	# 6. Set target positions
 	mob.target_position = $Base.global_position
-	
 	var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(30.0, mob_attack_slot_radius)
 	mob.target_attack_position = $Base.global_position + offset
 
+	# 7. Add to scene and connect
 	add_child(mob)
 	mob.died.connect(_on_mob_died)
 

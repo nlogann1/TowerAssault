@@ -1,6 +1,162 @@
-[gd_scene load_steps=2 format=3 uid="uid://87847hesl48n"]
+[gd_scene load_steps=31 format=3 uid="uid://c6s7cbr6d1pqa"]
 
-[ext_resource type="Script" uid="uid://bmvqsu5f0oyke" path="res://scripts/map_select.gd" id="1_7yywt"]
+[ext_resource type="Texture2D" uid="uid://dssh8o02ss7h5" path="res://assets/maps/castle.png" id="1_7yywt"]
+[ext_resource type="Script" uid="uid://bwbmb41llkm3q" path="res://scripts/map_select.gd" id="1_map_select_gd"]
+[ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_map_font"]
+[ext_resource type="Texture2D" uid="uid://cc04gd65eaw0f" path="res://assets/e6ca9e36738259.5727c4e790a74-ezgif.com-gif-to-sprite-converter.png" id="2_rhpil"]
+[ext_resource type="Texture2D" uid="uid://bd5rmbtjdhobj" path="res://assets/maps/game_background_4.png" id="3_cp53n"]
+[ext_resource type="Texture2D" uid="uid://dyb38b26e13rr" path="res://assets/maps/terrace.png" id="4_rhpil"]
+[ext_resource type="Texture2D" uid="uid://bf3uw7sprtdh6" path="res://assets/maps/dead forest.png" id="5_vch4l"]
+[ext_resource type="Texture2D" uid="uid://sjgprrt6d1qj" path="res://assets/maps/game_background_1.png" id="6_dxm2g"]
+[ext_resource type="Texture2D" uid="uid://cc2k2xpahy84t" path="res://assets/maps/throne room.png" id="8_qnykv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vch4l"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(0, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxm2g"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(900, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnykv"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(1800, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xwww"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(2700, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nedx"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(3600, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtuws"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(4500, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22axy"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(5400, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqmvf"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(6300, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlhxb"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(7200, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ywul"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(8100, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo003"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(9000, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dukf"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(9900, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ada5v"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(10800, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtfws"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(11700, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3bc7"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(12600, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_212qr"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(13500, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cthbj"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(14400, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy2kl"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(15300, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ospgw"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(16200, 0, 900, 558)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3slqu"]
+atlas = ExtResource("2_rhpil")
+region = Rect2(17100, 0, 900, 558)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uavqo"]
+animations = [{
+"frames": [{
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_vch4l")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_dxm2g")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_qnykv")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_1xwww")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_7nedx")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_jtuws")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_22axy")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_vqmvf")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_hlhxb")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_6ywul")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_yo003")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_1dukf")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_ada5v")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_dtfws")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_a3bc7")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_212qr")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_cthbj")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_vy2kl")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_ospgw")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_3slqu")
+}],
+"loop": true,
+"name": &"background",
+"speed": 5.0
+}]
 
 [node name="MapSelect" type="Control"]
 layout_mode = 3
@@ -9,43 +165,180 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7yywt")
+script = ExtResource("1_map_select_gd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 184.0
-offset_top = 136.0
-offset_right = 824.0
-offset_bottom = 400.0
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(672.00006, 368)
+scale = Vector2(1.5600002, 1.4206991)
+sprite_frames = SubResource("SpriteFrames_uavqo")
+animation = &"background"
+frame_progress = 0.8612409
 
-[node name="Map1Button" type="Button" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-text = "Field Map"
+alignment = 1
 
-[node name="Map2Button" type="Button" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Grave Yard"
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 64
+text = "Select a Map"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Map3Button" type="Button" parent="VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Dead Forest"
+size_flags_vertical = 3
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+columns = 3
 
-[node name="Map4Button" type="Button" parent="VBoxContainer"]
+[node name="Map1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Dusty Desert"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="Map5Button" type="Button" parent="VBoxContainer"]
+[node name="Map1Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map1"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-text = "Dark Castle"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_cp53n")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
-[node name="Map6Button" type="Button" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map1"]
 layout_mode = 2
-text = "Throne"
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 1 - Forest"
+horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 600.0
-offset_right = 1008.0
-offset_bottom = 648.0
-text = "Return to Menu"
+[node name="Map2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Map2Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map2"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_rhpil")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 2 - Terrace"
+horizontal_alignment = 1
+
+[node name="Map3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Map3Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map3"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_vch4l")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 3 - Dead Forest"
+horizontal_alignment = 1
+
+[node name="Map4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Map4Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map4"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_dxm2g")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 4 - Desert Wasteland"
+horizontal_alignment = 1
+
+[node name="Map5" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Map5Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map5"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_7yywt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 5 - Castle"
+horizontal_alignment = 1
+
+[node name="Map6" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Map6Button" type="TextureButton" parent="MarginContainer/VBoxContainer/GridContainer/Map6"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_qnykv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/Map6"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 24
+text = "Map 6 - Throne Room"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_map_font")
+theme_override_font_sizes/font_size = 28
+text = " Back to Main Menu "

@@ -6,6 +6,7 @@ signal died
 @export var health = 1000.0 # Boss health
 @export var currency_reward = 250 # Boss reward
 @export var attack_damage = 25.0 # Boss damage
+@export var faces_right_by_default = true
 
 var target_position = Vector2.ZERO
 var target_attack_position = Vector2.ZERO
@@ -66,10 +67,19 @@ func _physics_process(delta):
 			anim_sprite.play("walk")
 	
 	# Check the direction of movement
-	if velocity.x > 0:
-		anim_sprite.flip_h = false
-	elif velocity.x < 0:
-		anim_sprite.flip_h = true
+# Check the direction of movement
+	if faces_right_by_default:
+		# Original logic for right-facing sprites
+		if velocity.x > 0:
+			anim_sprite.flip_h = false
+		elif velocity.x < 0:
+			anim_sprite.flip_h = true
+	else:
+		# REVERSED logic for left-facing sprites
+		if velocity.x > 0:
+			anim_sprite.flip_h = true
+		elif velocity.x < 0:
+			anim_sprite.flip_h = false
 		
 	move_and_slide()
 
@@ -169,3 +179,7 @@ func pause_me():
 func unpause_me():
 	paused = false
 	attack_timer.paused = false
+
+
+func _on_detection_range_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

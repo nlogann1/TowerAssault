@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ich82qkpf18n"]
+[gd_scene load_steps=16 format=3 uid="uid://ich82qkpf18n"]
 
 [ext_resource type="Script" uid="uid://b87ut4xymjhua" path="res://scripts/main.gd" id="1_5w0ad"]
 [ext_resource type="PackedScene" uid="uid://bj7tdcte2r8rx" path="res://scenes/mob.tscn" id="2_kocsa"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://ra0wrn1lxlwe" path="res://scenes/boss.tscn" id="7_0a3ge"]
 [ext_resource type="PackedScene" uid="uid://cnmu1j1d0gc2r" path="res://scenes/hud.tscn" id="7_6li7e"]
 [ext_resource type="PackedScene" uid="uid://bwjv8d0rdpihv" path="res://scenes/base.tscn" id="8_tcq6v"]
+[ext_resource type="PackedScene" uid="uid://c8bh7kauonjfg" path="res://scenes/toxic_hound.tscn" id="8_v41ee"]
+[ext_resource type="PackedScene" uid="uid://dyf4oivq15684" path="res://scenes/boss2.tscn" id="9_tltda"]
+[ext_resource type="PackedScene" uid="uid://bebaxk18ffgx0" path="res://scenes/spawner.tscn" id="10_p6qw5"]
+[ext_resource type="PackedScene" uid="uid://1yvylxbpp0fu" path="res://scenes/fire_boss.tscn" id="11_6li7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(450, 368)
@@ -22,6 +26,10 @@ soldier_scene = ExtResource("4_v41ee")
 ghoul_mob_scene = ExtResource("5_tltda")
 catapult_scene = ExtResource("6_kocsa")
 boss_scene = ExtResource("7_0a3ge")
+toxic_hound_scene = ExtResource("8_v41ee")
+boss2_scene = ExtResource("9_tltda")
+spawner_scene = ExtResource("10_p6qw5")
+fire_boss_scene = ExtResource("11_6li7e")
 metadata/_edit_group_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -68,6 +76,9 @@ position = Vector2(80, 440)
 [node name="NextWaveTimer" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
+
+[node name="BossSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(952, 384)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
