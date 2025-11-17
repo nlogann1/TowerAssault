@@ -47,14 +47,13 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
-	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
+	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "toxic_hound", "mob_count": 8, "mob_delay": 0.8 },
 	{ "mob_type": "boss2", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
-	{ "mob_type": "ghoul", "mob_count": 3, "mob_delay": 3.0 },
 	{ "mob_type": "normal", "mob_count": 15, "mob_delay": 0.8 },
 ]
 
