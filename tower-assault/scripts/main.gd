@@ -11,9 +11,9 @@ extends Node
 @export var spawner_scene: PackedScene
 @export var fire_boss_scene: PackedScene
 
-# --- UNIT COSTS ---
+
 @export var soldier_cost = 25
-@export var tower_cost = 50 # This is the Archer
+@export var tower_cost = 50 
 @export var catapult_cost = 250
 
 @onready var map1 = preload("res://assets/maps/game_background_4.png")
@@ -34,7 +34,7 @@ var currency = 0
 var soldier_spawn_offset = 0
 var mouse_pos
 var can_build = true
-var unit_to_build_type = "" # <-- REPLACES build_tower_display
+var unit_to_build_type = "" 
 
 var current_wave = 0
 var mobs_spawned_in_wave = 0
@@ -48,7 +48,6 @@ var current_cost = 150
 var base_upgrade_costs = [150, 400, 99999]
 
 var wave_data = [ 
-	{ "mob_type": "fire_boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
 	{ "mob_type": "spawner", "mob_count": 1, "mob_delay": 2.0 },
 	{ "mob_type": "toxic_hound", "mob_count": 8, "mob_delay": 0.8 },
@@ -56,6 +55,7 @@ var wave_data = [
 	{ "mob_type": "ghoul", "mob_count": 5, "mob_delay": 2.0 },
 	{ "mob_type": "boss", "mob_count": 1, "mob_delay": 1.0 },
 	{ "mob_type": "normal", "mob_count": 8, "mob_delay": 1.5 },
+	{ "mob_type": "fire_boss", "mob_count": 1, "mob_delay": 1.0 },
 ]
 
 func _ready() -> void:
@@ -67,7 +67,6 @@ func _ready() -> void:
 
 
 func _process(delta: float):
-	# --- THIS IS THE NEW BUILD LOGIC ---
 	if Input.is_action_just_pressed(&"left_click") and unit_to_build_type != "":
 		mouse_pos = get_viewport().get_mouse_position()
 		if can_build:
@@ -78,7 +77,7 @@ func _process(delta: float):
 	if Input.is_action_just_pressed(&"escape"):
 		if unit_to_build_type != "":
 			unit_to_build_type = ""
-			$HUD.cancel_build_tower() # This function name is fine for now
+			$HUD.cancel_build_tower()
 		else:
 			if paused:
 				$HUD.pause(false)
@@ -107,7 +106,7 @@ func new_game():
 	$HUD.update_health(health, max_health)
 	$HUD.update_currency(currency)
 	$HUD.update_upgrade_cost(base_upgrade_costs[0])
-	$HUD.check_button_costs(currency) # This will now check all 3 units
+	$HUD.check_button_costs(currency) 
 	$HUD.show_buttons()
 	$HUD.show_message("Get Ready!")
 	$Base.update_visuals(castle_level, health, max_health)
@@ -117,12 +116,11 @@ func new_game():
 	
 	first_game = false
 
-# --- THIS IS THE NEW MASTER BUILD FUNCTION ---
 func build_unit(unit_type, position):
 	var scene_to_spawn = null
 	var cost = 0
 	
-	# 1. Figure out what we're building and what it costs
+	# Figure out what we're building and what it costs
 	if unit_type == "archer":
 		scene_to_spawn = tower_scene
 		cost = tower_cost
@@ -133,22 +131,21 @@ func build_unit(unit_type, position):
 		scene_to_spawn = catapult_scene
 		cost = catapult_cost
 	
-	# 2. Check if we can afford it
+	# Check if we can afford it
 	if currency >= cost:
-		# 3. Spend currency and update HUD
+		# Spend currency and update HUD
 		currency -= cost
 		$HUD.update_currency(currency)
 		$HUD.check_button_costs(currency)
 		
-		# 4. Create the unit
+		# Create the unit
 		var unit = scene_to_spawn.instantiate()
 		unit.global_position = position
 		add_child(unit)
 		
-		# 5. (Optional) Special logic for each unit
 		if unit_type == "archer" or unit_type == "catapult":
-			unit.scale /= 2 # Your original scaling
-			unit_to_build_type = "" # We've placed the unit
+			unit.scale /= 2 
+			unit_to_build_type = "" 
 		
 		if unit_type == "soldier":
 			soldier_spawn_offset += 20
@@ -224,16 +221,15 @@ func start_next_wave():
 	current_wave += 1
 
 func _on_mob_timer_timeout():
-	# 1. Get wave data and check if we're done
+	# Get wave data and check if we're done
 	var wave = wave_data[current_wave - 1]
 	if mobs_spawned_in_wave >= wave.mob_count:
 		$MobTimer.stop()
 		return
 	
-	# 2. Increment counter
 	mobs_spawned_in_wave += 1
 	
-	# 3. Figure out which scene to spawn
+	# Figure out which scene to spawn
 	var mob_to_spawn = mob_scene # Default
 	if wave.mob_type == "ghoul":
 		mob_to_spawn = ghoul_mob_scene
@@ -248,10 +244,10 @@ func _on_mob_timer_timeout():
 	elif wave.mob_type == "fire_boss": 
 		mob_to_spawn = fire_boss_scene
 	
-	# 4. NOW we create the mob
+	# create the mob
 	var mob = mob_to_spawn.instantiate() 
 	
-	# 5. Figure out where to spawn it
+	# Figure out where to spawn it
 	if wave.mob_type == "boss" or wave.mob_type == "boss2" or wave.mob_type == "spawner":
 		# It's a boss, spawn it at the special point
 		mob.global_position = $BossSpawnPoint.global_position
@@ -261,12 +257,11 @@ func _on_mob_timer_timeout():
 		var random_spawn_point = spawn_points.pick_random()
 		mob.global_position = random_spawn_point.global_position
 	
-	# 6. Set target positions
+	# Set target positions
 	mob.target_position = $Base.global_position
 	var offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(30.0, mob_attack_slot_radius)
 	mob.target_attack_position = $Base.global_position + offset
 
-	# 7. Add to scene and connect
 	add_child(mob)
 	mob.died.connect(_on_mob_died)
 

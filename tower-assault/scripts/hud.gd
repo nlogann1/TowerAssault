@@ -24,6 +24,8 @@ func _ready() -> void:
 	$UpgradeCostLabel.hide()
 	$WaveCountdownLabel.hide()
 	$Inventory.hide()
+	$Gold.hide()
+	$CurrencyLabel.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -40,7 +42,6 @@ func show_game_over():
 	show_message("Game Over")
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
-	$StartButton.show()
 	
 	$Message.text = "Try again?"
 	$Message.show()
@@ -64,6 +65,8 @@ func _on_start_button_pressed():
 	$Inventory.show()
 	$SpawnSoldierIconButton.show()
 	$SpawnCatapultIconButton.show()
+	$Gold.show()
+	$CurrencyLabel.show()
 	paused = false
 	start_game.emit()
 
@@ -134,14 +137,12 @@ func pause(state):
 	if paused:
 		$PauseMenu.show()
 		paused = true
-		$PauseButton.text = "Play"
 		get_tree().call_group("enemies", "pause_me")
 		get_tree().call_group("main", "pause_me")
 		get_tree().call_group("soldiers", "pause_me")
 	else:
 		$PauseMenu.hide()
 		paused = false
-		$PauseButton.text = "Pause"
 		$PauseMenu.unpause()
 		get_tree().call_group("enemies", "unpause_me")
 		get_tree().call_group("main", "unpause_me")
