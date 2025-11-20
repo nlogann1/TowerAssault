@@ -1,18 +1,30 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnmu1j1d0gc2r"]
+[gd_scene load_steps=22 format=3 uid="uid://cnmu1j1d0gc2r"]
 
 [ext_resource type="Script" uid="uid://c5j3t3m4amth4" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://blhyc0hgdpgvm" path="res://assets/gold.png" id="2_apjy4"]
 [ext_resource type="FontFile" uid="uid://61iyiy8sv6ho" path="res://fonts/Maglisto.otf" id="2_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://ck7gecbdpy3ji" path="res://assets/start323.png" id="3_5n1hp"]
 [ext_resource type="Texture2D" uid="uid://dqd5ggxhxjs8k" path="res://assets/Pixel1_Healthbar_0002_pixel1_border.png" id="3_6fi6k"]
 [ext_resource type="Texture2D" uid="uid://dh7yddvg6mlie" path="res://assets/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://djmrewxt6er3b" path="res://assets/Action_panel.png" id="5_047uy"]
+[ext_resource type="Texture2D" uid="uid://xe1symdk4xnd" path="res://assets/rthrth.png" id="5_eld54"]
+[ext_resource type="Texture2D" uid="uid://d11ubr2xe5yv5" path="res://assets/pause.png" id="6_3swnk"]
 [ext_resource type="Texture2D" uid="uid://dkr01odafkhtc" path="res://assets/32x32.png" id="6_5pdws"]
+[ext_resource type="Texture2D" uid="uid://c46yyukx6qowy" path="res://assets/money.png" id="7_qkknv"]
 [ext_resource type="PackedScene" uid="uid://bxtqkb4e8dqic" path="res://scenes/pausemenu.tscn" id="7_uo2fv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Theme" id="Theme_apjy4"]
+default_font = ExtResource("2_oo0fn")
+default_font_size = 29
+
 [sub_resource type="LabelSettings" id="LabelSettings_ahhtf"]
-font_color = Color(0, 0, 0, 1)
+font = ExtResource("2_oo0fn")
+font_size = 19
+font_color = Color(0.86311215, 0.7692523, 0.40529522, 1)
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_5ysmq"]
@@ -20,7 +32,8 @@ default_font = ExtResource("2_oo0fn")
 default_font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_5ysmq"]
-font_color = Color(0, 0, 0, 1)
+font = ExtResource("2_oo0fn")
+font_color = Color(0.99, 0.22968006, 0.039600022, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd3ao"]
 atlas = ExtResource("5_047uy")
@@ -41,6 +54,11 @@ region = Rect2(352.03113, 3168.7866, 33.93628, 29.519531)
 [node name="HUD" type="CanvasLayer" groups=["HUD"]]
 script = ExtResource("1_ahhtf")
 
+[node name="Gold" type="Sprite2D" parent="."]
+position = Vector2(498, 696.625)
+scale = Vector2(2.2769234, 1.1287862)
+texture = ExtResource("2_apjy4")
+
 [node name="ScoreLabel" type="Label" parent="."]
 visible = false
 offset_left = 103.0
@@ -56,12 +74,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.5
-offset_top = -11.5
-offset_right = 33.5
-offset_bottom = 11.5
+offset_left = -51.0
+offset_top = -191.0
+offset_right = 60.0
+offset_bottom = -151.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_apjy4")
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 7
@@ -69,13 +88,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -27.0
-offset_top = -253.0
-offset_right = 19.0
-offset_bottom = -222.0
+offset_left = -90.0
+offset_top = -357.99997
+offset_right = -18.0
+offset_bottom = -317.99997
 grow_horizontal = 2
 grow_vertical = 0
-text = "Start"
+scale = Vector2(2.5, 2.5)
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("3_5n1hp")
 
 [node name="BuildArcherButton" type="Button" parent="."]
 visible = false
@@ -90,12 +112,14 @@ text = "Spawn
 Archer"
 
 [node name="MessageTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="CurrencyLabel" type="Label" parent="."]
-offset_right = 98.0
-offset_bottom = 28.0
+offset_left = 444.0
+offset_top = 686.0
+offset_right = 561.0
+offset_bottom = 709.0
 text = " Gold: 500"
 label_settings = SubResource("LabelSettings_ahhtf")
 
@@ -109,16 +133,20 @@ theme = SubResource("Theme_5ysmq")
 horizontal_alignment = 1
 
 [node name="UpgradeBaseButton" type="Button" parent="."]
-offset_top = 666.0
-offset_right = 75.0
-offset_bottom = 720.0
-text = "Upgrade
-Base"
+offset_left = 9.0
+offset_top = 640.0
+offset_right = 55.0
+offset_bottom = 682.0
+scale = Vector2(2, 2)
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("5_eld54")
 
 [node name="UpgradeCostLabel" type="Label" parent="."]
-offset_top = 643.0
-offset_right = 75.0
-offset_bottom = 668.0
+offset_left = 71.0
+offset_top = 672.0
+offset_right = 146.0
+offset_bottom = 697.0
 label_settings = SubResource("LabelSettings_5ysmq")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -127,18 +155,25 @@ vertical_alignment = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -60.0
-offset_bottom = 64.0
+offset_left = -82.0
+offset_top = 10.0
+offset_right = -42.0
+offset_bottom = 50.0
 grow_horizontal = 0
-text = "Pause"
+scale = Vector2(2, 2)
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("6_3swnk")
 
 [node name="FreeGoldButton" type="Button" parent="."]
-offset_left = 1020.0
-offset_top = 67.0
-offset_right = 1080.0
-offset_bottom = 125.0
-text = "Free
-Gold"
+offset_left = 996.0
+offset_top = 91.0
+offset_right = 1036.0
+offset_bottom = 131.0
+scale = Vector2(2, 2)
+mouse_default_cursor_shape = 2
+theme_type_variation = &"FlatButton"
+icon = ExtResource("7_qkknv")
 
 [node name="BaseHealthBar" type="TextureProgressBar" parent="."]
 offset_left = 408.0
@@ -158,34 +193,34 @@ scale = Vector2(1.5, 1.5)
 transform = Transform2D(1.5, 0, 0, 1.5, 475, 280)
 
 [node name="Inventory" type="TextureRect" parent="."]
-offset_left = 576.0
-offset_top = 650.0
-offset_right = 1080.0
-offset_bottom = 709.0
+offset_left = 573.0
+offset_top = 657.0
+offset_right = 1077.0
+offset_bottom = 716.0
 texture = SubResource("AtlasTexture_hd3ao")
 
 [node name="SpawnSoldierIconButton" type="TextureButton" parent="."]
-offset_left = 598.0
-offset_top = 670.0
-offset_right = 634.0
-offset_bottom = 703.0
+offset_left = 595.0
+offset_top = 677.0
+offset_right = 631.0
+offset_bottom = 710.0
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_0i1j5")
 
 [node name="SpawnCatapultIconButton" type="TextureButton" parent="."]
-offset_left = 691.0
-offset_top = 669.0
-offset_right = 727.0
-offset_bottom = 702.0
+offset_left = 688.0
+offset_top = 676.0
+offset_right = 724.0
+offset_bottom = 709.0
 scale = Vector2(1.15, 1.15)
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_5pdws")
 
 [node name="SpawnArcherButton" type="TextureButton" parent="."]
-offset_left = 645.0
-offset_top = 673.0
-offset_right = 678.0
-offset_bottom = 709.0
+offset_left = 643.0
+offset_top = 679.0
+offset_right = 676.0
+offset_bottom = 715.0
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("AtlasTexture_047uy")
 

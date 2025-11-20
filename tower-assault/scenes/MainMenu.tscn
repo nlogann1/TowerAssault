@@ -2379,6 +2379,7 @@ text = "Tower Assault"
 
 [node name="Button (Start Game)" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0.7776748, 0, 0.22477162, 1)
 theme_override_font_sizes/font_size = 30
@@ -2391,6 +2392,7 @@ text = "Start Game"
 
 [node name="Button2 (Quit)" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
 theme_override_colors/font_hover_color = Color(0.9820958, 0, 0.06008558, 1)
 theme_override_font_sizes/font_size = 24
